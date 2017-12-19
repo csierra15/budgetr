@@ -17,3 +17,15 @@ describe('index page', function () {
       });
   });
 });
+
+describe('signup page', function () {
+    it('should exist', function () {
+      return chai.request(app)
+        .get('/signup.html')
+        .then(function (res) {
+          res.should.have.status(200);
+        });
+    });
+  });
+
+  

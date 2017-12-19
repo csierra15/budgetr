@@ -4,11 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <title>Budgetr</title>
 </head>
 <body>
     <h1>Welcome to budgetr!</h1>
-        <p>hello world! Budgetr is an app in progress, and when it is done will allow you to track your purchases and set spending goals. </p>
-        <p>Here's an example of what the app will look like!</p>
+    <p>hello world! Budgetr is an app in progress, and when it is done will allow you to track your purchases and set spending goals. </p>
+    <p>Here's an example of what you can do with the app!</p>
+
+    <table id="display-table">
+        <tr>
+            <th>Item</th>
+            <th>Quantity purchased</th>
+            <th>Cost</th>
+            <th>Date purchased</th>
+            <th>When you expect to buy again</th>
+        </tr>
+        <tr>
+            <td class="item-data">Eggs</td>
+            <td class="quantity-data">1 dozen</td>
+            <td class="cost-data">$3.50</td>
+            <td class="date-data">11/21/17</td>
+            <td class="buy-next-data">12/01/17</td>
+        </tr>
+    </table>
+
+    <h2>Goals!</h2>
+
+    <ul id="goals">
+        <li class="goal">Only buy paper towels once this month</li>
+        <li class="goal">Spend less than $400 on food</li>
+        <li class="goal">Meet 50% of purchase predictions</li>
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
+    <script type="text/javascript" src="index.js"></script>
+
 </body>
 </html>
