@@ -5,7 +5,7 @@ let MOCK_PURCHASES = {
             item: "Eggs",
             quantity: "1 dozen",
             cost: "$2.50",
-            datePurchased: "11/27/17",
+            purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17"   
         },
@@ -14,7 +14,7 @@ let MOCK_PURCHASES = {
             item: "Milk",
             quantity: "1 gallon",
             cost: "$3.50",
-            datePurchased: "11/27/17",
+            purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17"   
         },
@@ -23,7 +23,7 @@ let MOCK_PURCHASES = {
             item: "Paper Towels",
             quantity: "12 rolls",
             cost: "$14.75",
-            datePurchased: "11/27/17",
+            purchaseDate: "11/27/17",
             expected: "2 months (1/27/18)",
             actual: "TBD"   
         },
@@ -32,7 +32,7 @@ let MOCK_PURCHASES = {
             item: "Heavy Cream",
             quantity: "1 quart",
             cost: "$3.50",
-            datePurchased: "11/27/17",
+            purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17"   
         }
@@ -56,24 +56,43 @@ let MOCK_GOALS = {
     ]
 };
 
+let purchases = [];
+let goals = [];
+
+function processPurchaseData(purchaseData, callback) {
+    purchases = Object.values(purchaseData.purchases);
+    callback();
+}
+
 function getPurchases(callbackFn) {
-    setTimeout(function(){ callbackFn(MOCK_PURCHASES)}, 100);
+    setTimeout(function(){processPurchaseData(MOCK_PURCHASES, callbackFn)}, 100);
+}
+
+function displayPurchases(data) {
+    console.log('displayPurchases ran');
+    const tableData = purchases.map(purchase => {`
+        <tr>
+            <td class="item-data">${purchase.item}</td>
+            <td class="quantity-data">${purchase.quantity}</td>
+            <td class="cost-data">${purchase.cost}</td>
+            <td class="date-data">${purchase.purchaseDate}</td>
+            <td class="buy-next-data">${purchase.expected}</td>
+            <td class="bought-data">${purchase.actual}</td>
+        </tr>
+    `});
+
+    $('.table-data').append(tableData);
+    console.log(tableData)
+}
+
+function getAndDisplayPurchases() {
+    getPurchases(displayPurchases);
 }
 
 function getGoals(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_GOALS)}, 100);
 }
 
-function displayPurchases(data) {
-    for(index in data.purchases) {
-        $('#display-table').html(`
-            <tr>
-                <td class="item-data">Eggs</td>
-                <td class="quantity-data">1 dozen</td>
-                <td class="cost-data">$3.50</td>
-                <td class="date-data">11/21/17</td>
-                <td class="buy-next-data">12/01/17</td>
-            </tr>
-            `);
-    }
-}
+$(function() {
+    getAndDisplayPurchases()
+});
