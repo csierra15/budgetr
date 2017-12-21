@@ -1,3 +1,5 @@
+'use strict';
+
 let MOCK_PURCHASES = {
     "purchases": [
         {
@@ -55,6 +57,9 @@ let MOCK_GOALS = {
         }
     ]
 };
+
+import Chart from 'chart.js';
+var myChart = new Chart(ctx, {...});
 
 let purchases = [];
 let goals = [];
