@@ -1,0 +1,19 @@
+body {
+    padding-top: 100px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.signupForm {
+    border: 1px solid;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+input {
+    display: block;
+    padding: 5px;
+}

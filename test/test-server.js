@@ -11,14 +11,14 @@ chai.use(chaiHttp);
 describe('index page', function () {
   it('should exist', function () {
     return chai.request(app)
-      .get('/')
+      .get('/dashboard.html')
       .then(function (res) {
         res.should.have.status(200);
       });
   });
 });
 
-describe('signup page', function () {
+describe('landing page', function () {
     it('should exist', function () {
       return chai.request(app)
         .get('/signup.html')
