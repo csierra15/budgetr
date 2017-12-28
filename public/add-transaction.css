@@ -12,8 +12,12 @@ h1 {
     padding: 10px;
 }
 
-input {
+input[type=text] {
     display: block;
     padding: 5px;
     margin: 0 auto;
+}
+
+input[type=radio] {
+    display: inline-block;
 }
