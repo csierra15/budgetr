@@ -1,7 +1,7 @@
 'use strict';
 
-let MOCK_PURCHASES = {
-    "purchases": [
+let MOCK_EXPENSES = {
+    "expenses": [
         {
             id: "11111",
             item: "Eggs",
@@ -10,7 +10,7 @@ let MOCK_PURCHASES = {
             purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17",
-            category: "food"   
+            category: "food" 
         },
         {
             id: "22222",
@@ -55,6 +55,26 @@ let MOCK_PURCHASES = {
     ]
 };
 
+let MOCK_INCOME = {
+    "income": [
+        {
+            id: "111",
+            description: "payday",
+            amount: "248.65"
+        },
+        {
+            id: "222",
+            description: "Christmas Check",
+            amount: "100"
+        },
+        {
+            id: "333",
+            description: "payday",
+            amount: "268.76"
+        }
+    ]
+}
+
 let MOCK_GOALS = {
     "goals": [
         {
@@ -72,37 +92,63 @@ let MOCK_GOALS = {
     ]
 };
 
-let purchases = [];
+//==== INCOME ====
+let income = [];
 
-//===== PURCHASES ======
-
-function processPurchaseData(purchaseData, callback) {
-    purchases = Object.values(purchaseData.purchases);
+function processIncomeData(incomeData, callback) {
+    income = Object.values(incomeData.income);
     callback();
 }
 
-function getPurchases(callbackFn) {
-    setTimeout(function(){processPurchaseData(MOCK_PURCHASES, callbackFn)}, 100);
+function getIncome(callbackFn) {
+    setTimeout(function(){processIncomeData(MOCK_INCOME, callbackFn)}, 100);
 }
 
-function displayPurchases() {
-    console.log('displayPurchases ran');
-    const options = purchases.map(purchase => {
-        return `<h3 class="item">${purchase.item}</h3>` + 
-        `<p class="cost">${purchase.cost}</p>` +
-        `<p class="quantity">${purchase.quantity}</p>` +
-        `<p class="purchaseDate">${purchase.purchaseDate}</p>` +
-        `<p class="category">${purchase.category}</p>`
+function displayIncome() {
+    console.log('displayIncome ran');
+    const totalIncome = income.map(income => income.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
     });
 
-    $(".purchaseData").html(options);
+    $(".incomeData").append(`<p>${totalIncome}</p>`);
 }
 
-function getAndDisplayPurchases() {
-    getPurchases(displayPurchases);
+function getAndDisplayIncome() {
+    getIncome(displayIncome);
 }
 
-//==== GOAL ======
+
+//===== EXPENSES ======
+
+let expenses = [];
+
+function processExpenseData(expenseData, callback) {
+    expenses = Object.values(expenseData.expenses);
+    callback();
+}
+
+function getExpenses(callbackFn) {
+    setTimeout(function(){processExpenseData(MOCK_EXPENSES, callbackFn)}, 100);
+}
+
+function displayExpenses() {
+    console.log('displayExpenses ran');
+    const newHtml = expenses.map(expense => {
+        return `<h3 class="item">${expense.item}</h3>` + 
+        `<p class="cost">${expense.cost}</p>` +
+        `<p class="quantity">${expense.quantity}</p>` +
+        `<p class="purchaseDate">${expense.purchaseDate}</p>` +
+        `<p class="category">${expense.category}</p>`
+    });
+
+    $(".expenseData").html(newHtml);
+}
+
+function getAndDisplayExpenses() {
+    getExpenses(displayExpenses);
+}
+
+//==== GOALS ======
 let goals = [];
 
 function processGoalData(goalData, callback) {
@@ -116,11 +162,11 @@ function getGoals(callbackFn) {
 
 function displayGoals() {
     console.log('displayGoals ran');
-    const options = goals.map(goal => {
+    const newHtml = goals.map(goal => {
         return `<p>${goal.goal}</p>`
     });
 
-    $(".goals").html(options);
+    $(".goals").html(newHtml);
 }
 
 function getAndDisplayGoals() {
@@ -128,7 +174,8 @@ function getAndDisplayGoals() {
 }
 
 $(function() {
-    getAndDisplayPurchases();
+    getAndDisplayIncome();
+    getAndDisplayExpenses();
     getAndDisplayGoals();
 });
 
