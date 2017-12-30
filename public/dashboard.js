@@ -163,7 +163,12 @@ function getGoals(callbackFn) {
 function displayGoals() {
     console.log('displayGoals ran');
     const newHtml = goals.map(goal => {
-        return `<p>${goal.goal}</p>`
+        return `
+            <div id="goal">
+                <p>${goal.goal}</p>
+                <button id="editGoal">Edit</button>
+                <button id="completeGoal">Completed</button>
+            </div>`
     });
 
     $(".goals").html(newHtml);
@@ -173,10 +178,26 @@ function getAndDisplayGoals() {
     getGoals(displayGoals);
 }
 
+// ==== CALCULATE BUDGET (income - expenses) ====
+
+function calculateBudget() {
+
+}
+
 $(function() {
     getAndDisplayIncome();
     getAndDisplayExpenses();
     getAndDisplayGoals();
+    
+    $('body').on('click', '#editGoal', (e) => {
+        console.log('You clicked edit');
+    });
+
+    $('body').on('click', '#completeGoal', (e) => {
+        console.log('You completed a goal!');
+        e.preventDefault();
+        $('#goal').remove();
+    });
 });
 
 /*
