@@ -6,7 +6,7 @@ let MOCK_EXPENSES = {
             id: "11111",
             item: "Eggs",
             quantity: "1 dozen",
-            cost: "$2.50",
+            cost: 2.50,
             purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17",
@@ -16,7 +16,7 @@ let MOCK_EXPENSES = {
             id: "22222",
             item: "Milk",
             quantity: "1 gallon",
-            cost: "$3.50",
+            cost: 3.50,
             purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17",
@@ -26,7 +26,7 @@ let MOCK_EXPENSES = {
             id: "33333",
             item: "Paper Towels",
             quantity: "12 rolls",
-            cost: "$14.75",
+            cost: 14.75,
             purchaseDate: "11/27/17",
             expected: "2 months (1/27/18)",
             actual: "TBD",
@@ -36,7 +36,7 @@ let MOCK_EXPENSES = {
             id: "44444",
             item: "Heavy Cream",
             quantity: "1 quart",
-            cost: "$3.50",
+            cost: 3.50,
             purchaseDate: "11/27/17",
             expected: "2 weeks (12/11/17)",
             actual: "12/08/17",
@@ -46,7 +46,7 @@ let MOCK_EXPENSES = {
             id: "55555",
             item: "TV",
             quantity: "1",
-            cost: "$479",
+            cost: 479,
             purchaseDate: "12/20/17",
             expected: "n/a",
             actual: "n/a",
@@ -60,17 +60,17 @@ let MOCK_INCOME = {
         {
             id: "111",
             description: "payday",
-            amount: "248.65"
+            amount: 248.65
         },
         {
             id: "222",
             description: "Christmas Check",
-            amount: "100"
+            amount: 100
         },
         {
             id: "333",
             description: "payday",
-            amount: "268.76"
+            amount: 268.76
         }
     ]
 }
@@ -181,13 +181,24 @@ function getAndDisplayGoals() {
 // ==== CALCULATE BUDGET (income - expenses) ====
 
 function calculateBudget() {
+    const totalExpenses = expense.map(expense => expense.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
 
+    const totalIncome = income.map(income => income.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
+
+    const totalBudget = totalIncome - totalExpenses;
+
+    $(".budgetData").html(totalBudget);
 }
 
 $(function() {
     getAndDisplayIncome();
     getAndDisplayExpenses();
     getAndDisplayGoals();
+    calculateBudget();
     
     $('body').on('click', '#editGoal', (e) => {
         console.log('You clicked edit');
