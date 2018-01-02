@@ -95,18 +95,24 @@ let MOCK_GOALS = {
 //==== INCOME ====
 let income = [];
 
-function processIncomeData(incomeData, callback) {
+function processIncomeData(incomeData) {
     income = Object.values(incomeData.income);
-    callback();
+    return income;
 }
 
-function getIncome(callbackFn) {
-    setTimeout(function(){processIncomeData(MOCK_INCOME, callbackFn)}, 100);
+function getIncome() {
+    return new Promise((resolve, reject) => {
+        setTimeout(function(){
+            let data = processIncomeData(MOCK_INCOME);
+            resolve(data);
+        }, 100);
+    });
 }
 
-function displayIncome() {
+function displayIncome(income) {
     console.log('displayIncome ran');
-    const totalIncome = income.map(income => income.amount).reduce((a, b) => {
+    const totalIncome = income.map(income => 
+        income.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
 
@@ -114,7 +120,10 @@ function displayIncome() {
 }
 
 function getAndDisplayIncome() {
-    getIncome(displayIncome);
+    return getIncome()
+        .then(income => {
+            displayIncome(income);
+        });
 }
 
 
@@ -122,13 +131,18 @@ function getAndDisplayIncome() {
 
 let expenses = [];
 
-function processExpenseData(expenseData, callback) {
+function processExpenseData(expenseData) {
     expenses = Object.values(expenseData.expenses);
-    callback();
+    return expenses;
 }
 
-function getExpenses(callbackFn) {
-    setTimeout(function(){processExpenseData(MOCK_EXPENSES, callbackFn)}, 100);
+function getExpenses() {
+    return new Promise((resolve, reject) => {
+        setTimeout(function(){
+            let expenses = processExpenseData(MOCK_EXPENSES);
+            resolve(expenses);
+        }, 100);
+    });
 }
 
 function displayExpenses() {
@@ -145,19 +159,27 @@ function displayExpenses() {
 }
 
 function getAndDisplayExpenses() {
-    getExpenses(displayExpenses);
+    return getExpenses()
+        .then(expenses => {
+            displayExpenses(expenses);
+        });
 }
 
 //==== GOALS ======
 let goals = [];
 
-function processGoalData(goalData, callback) {
+function processGoalData(goalData) {
     goals = Object.values(goalData.goals);
-    callback();
+    return goals;
 }
 
-function getGoals(callbackFn) {
-    setTimeout(function(){processGoalData(MOCK_GOALS, callbackFn)}, 100);
+function getGoals() {
+    return new Promise((resolve, reject) => {
+        setTimeout(function(){
+            let goals = processGoalData(MOCK_GOALS);
+            resolve(goals);
+        }, 100);
+    });
 }
 
 function displayGoals() {
@@ -175,7 +197,10 @@ function displayGoals() {
 }
 
 function getAndDisplayGoals() {
-    getGoals(displayGoals);
+    return getGoals()
+        .then(goals => {
+            displayGoals(goals);
+        });
 }
 
 // ==== CALCULATE BUDGET (income - expenses) ====
@@ -195,10 +220,13 @@ function calculateBudget() {
 }
 
 $(function() {
-    getAndDisplayIncome();
-    getAndDisplayExpenses();
+    Promise.all([
+        getAndDisplayIncome(),
+        getAndDisplayExpenses()
+    ]).then(() => {
+      calculateBudget();
+    });
     getAndDisplayGoals();
-    calculateBudget();
     
     $('body').on('click', '#editGoal', (e) => {
         console.log('You clicked edit');
