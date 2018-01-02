@@ -181,7 +181,7 @@ function getAndDisplayGoals() {
 // ==== CALCULATE BUDGET (income - expenses) ====
 
 function calculateBudget() {
-    const totalExpenses = expense.map(expense => expense.amount).reduce((a, b) => {
+    const totalExpenses = expense.map(expense => expense.cost).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
 
