@@ -1,96 +1,6 @@
 'use strict';
 
-let MOCK_EXPENSES = {
-    "expenses": [
-        {
-            "id": "11111",
-            "item": "Eggs",
-            "quantity": "1 dozen",
-            "cost": 2.50,
-            "purchaseDate": "11/27/17",
-            "expected": "2 weeks (12/11/17)",
-            "actual": "12/08/17",
-            "category": "food" 
-        },
-        {
-            "id": "22222",
-            "item": "Milk",
-            "quantity": "1 gallon",
-            "cost": 3.50,
-            "purchaseDate": "11/27/17",
-            "expected": "2 weeks (12/11/17)",
-            "actual": "12/08/17",
-            "category": "food"   
-        },
-        {
-            "id": "33333",
-            "item": "Paper Towels",
-            "quantity": "12 rolls",
-            "cost": 14.75,
-            "purchaseDate": "11/27/17",
-            "expected": "2 months (1/27/18)",
-            "actual": "TBD",
-            "category": "home"
-        },
-        {
-            "id": "44444",
-            "item": "Heavy Cream",
-            "quantity": "1 quart",
-            "cost": 3.50,
-            "purchaseDate": "11/27/17",
-            "expected": "2 weeks (12/11/17)",
-            "actual": "12/08/17",
-            "category": "food" 
-        },
-        {
-            "id": "55555",
-            "item": "TV",
-            "quantity": "1",
-            "cost": 479,
-            "purchaseDate": "12/20/17",
-            "expected": "n/a",
-            "actual": "n/a",
-            "category": "electronics" 
-        }
-    ]
-};
-
-let MOCK_INCOME = {
-    "income": [
-        {
-            "id": "111",
-            "description": "payday",
-            "amount": 248.65
-        },
-        {
-            "id": "222",
-            "description": "Christmas Check",
-            "amount": 100
-        },
-        {
-            "id": "333",
-            "description": "payday",
-            "amount": 268.76
-        }
-    ]
-}
-
-let MOCK_GOALS = {
-    "goals": [
-        {
-            "id": "1111",
-            "goal": "Spend less than $500 this month on food"
-        },
-        {
-            "id": "2222",
-            "goal": "Only buy paper towels once this month"
-        },
-        {
-            "id": "3333",
-            "goal": "Meet 50% of purchase predictions"
-        }
-    ]
-};
+let MOCK_URL = "https://0407737f-0ddb-4a66-9b90-2e659c4a31ce.mock.pstmn.io";
 
 //==== INCOME ====
 let income = [];
@@ -101,12 +11,12 @@ function processIncomeData(incomeData) {
 }
 
 function getIncome() {
-    return new Promise((resolve, reject) => {
-        setTimeout(function(){
-            let data = processIncomeData(MOCK_INCOME);
-            resolve(data);
-        }, 100);
-    });
+    return fetch(MOCK_URL + "/income")
+        .then(data => data.json())
+        .then(data => {
+            income = data;
+            return data;
+        });
 }
 
 function displayIncome(income) {
@@ -137,12 +47,12 @@ function processExpenseData(expenseData) {
 }
 
 function getExpenses() {
-    return new Promise((resolve, reject) => {
-        setTimeout(function(){
-            let expenses = processExpenseData(MOCK_EXPENSES);
-            resolve(expenses);
-        }, 100);
-    });
+    return fetch(MOCK_URL + "/expenses")
+        .then(data => data.json())
+        .then(data => {
+            expenses = data;
+            return data;
+        });
 }
 
 function displayExpenses() {
@@ -174,12 +84,12 @@ function processGoalData(goalData) {
 }
 
 function getGoals() {
-    return new Promise((resolve, reject) => {
-        setTimeout(function(){
-            let goals = processGoalData(MOCK_GOALS);
-            resolve(goals);
-        }, 100);
-    });
+    return fetch(MOCK_URL + "/goals")
+        .then(data => data.json())
+        .then(data => {
+            goals = data;
+            return data;
+        });
 }
 
 function displayGoals() {
@@ -206,7 +116,7 @@ function getAndDisplayGoals() {
 // ==== CALCULATE BUDGET (income - expenses) ====
 
 function calculateBudget() {
-    const totalExpenses = expense.map(expense => expense.cost).reduce((a, b) => {
+    const totalExpenses = expenses.map(expense => expense.cost).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
 
@@ -214,7 +124,9 @@ function calculateBudget() {
         return parseFloat(a) + parseFloat(b);
     });
 
-    const totalBudget = totalIncome - totalExpenses;
+    const total = totalIncome - totalExpenses;
+
+    const totalBudget = total.toFixed(2);
 
     $(".budgetData").html(totalBudget);
 }
