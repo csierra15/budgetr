@@ -1,6 +1,26 @@
 'use strict';
 
-let MOCK_URL = "https://0407737f-0ddb-4a66-9b90-2e659c4a31ce.mock.pstmn.io";
+const MOCK_URL = "https://0407737f-0ddb-4a66-9b90-2e659c4a31ce.mock.pstmn.io";
+
+function displayMonth() {
+    let d = new Date();
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    let n = month[d.getMonth()];
+
+    $(".month").html(n + " Budget");
+}
 
 //==== INCOME ====
 let income = [];
@@ -132,6 +152,7 @@ function calculateBudget() {
 }
 
 $(function() {
+    displayMonth()
     Promise.all([
         getAndDisplayIncome(),
         getAndDisplayExpenses()
