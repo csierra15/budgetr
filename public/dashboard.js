@@ -3,54 +3,54 @@
 let MOCK_EXPENSES = {
     "expenses": [
         {
-            id: "11111",
-            item: "Eggs",
-            quantity: "1 dozen",
-            cost: 2.50,
-            purchaseDate: "11/27/17",
-            expected: "2 weeks (12/11/17)",
-            actual: "12/08/17",
-            category: "food" 
+            "id": "11111",
+            "item": "Eggs",
+            "quantity": "1 dozen",
+            "cost": 2.50,
+            "purchaseDate": "11/27/17",
+            "expected": "2 weeks (12/11/17)",
+            "actual": "12/08/17",
+            "category": "food" 
         },
         {
-            id: "22222",
-            item: "Milk",
-            quantity: "1 gallon",
-            cost: 3.50,
-            purchaseDate: "11/27/17",
-            expected: "2 weeks (12/11/17)",
-            actual: "12/08/17",
-            category: "food"   
+            "id": "22222",
+            "item": "Milk",
+            "quantity": "1 gallon",
+            "cost": 3.50,
+            "purchaseDate": "11/27/17",
+            "expected": "2 weeks (12/11/17)",
+            "actual": "12/08/17",
+            "category": "food"   
         },
         {
-            id: "33333",
-            item: "Paper Towels",
-            quantity: "12 rolls",
-            cost: 14.75,
-            purchaseDate: "11/27/17",
-            expected: "2 months (1/27/18)",
-            actual: "TBD",
-            category: "home"
+            "id": "33333",
+            "item": "Paper Towels",
+            "quantity": "12 rolls",
+            "cost": 14.75,
+            "purchaseDate": "11/27/17",
+            "expected": "2 months (1/27/18)",
+            "actual": "TBD",
+            "category": "home"
         },
         {
-            id: "44444",
-            item: "Heavy Cream",
-            quantity: "1 quart",
-            cost: 3.50,
-            purchaseDate: "11/27/17",
-            expected: "2 weeks (12/11/17)",
-            actual: "12/08/17",
-            category: "food" 
+            "id": "44444",
+            "item": "Heavy Cream",
+            "quantity": "1 quart",
+            "cost": 3.50,
+            "purchaseDate": "11/27/17",
+            "expected": "2 weeks (12/11/17)",
+            "actual": "12/08/17",
+            "category": "food" 
         },
         {
-            id: "55555",
-            item: "TV",
-            quantity: "1",
-            cost: 479,
-            purchaseDate: "12/20/17",
-            expected: "n/a",
-            actual: "n/a",
-            category: "electronics" 
+            "id": "55555",
+            "item": "TV",
+            "quantity": "1",
+            "cost": 479,
+            "purchaseDate": "12/20/17",
+            "expected": "n/a",
+            "actual": "n/a",
+            "category": "electronics" 
         }
     ]
 };
@@ -58,19 +58,19 @@ let MOCK_EXPENSES = {
 let MOCK_INCOME = {
     "income": [
         {
-            id: "111",
-            description: "payday",
-            amount: 248.65
+            "id": "111",
+            "description": "payday",
+            "amount": 248.65
         },
         {
-            id: "222",
-            description: "Christmas Check",
-            amount: 100
+            "id": "222",
+            "description": "Christmas Check",
+            "amount": 100
         },
         {
-            id: "333",
-            description: "payday",
-            amount: 268.76
+            "id": "333",
+            "description": "payday",
+            "amount": 268.76
         }
     ]
 }
@@ -78,16 +78,16 @@ let MOCK_INCOME = {
 let MOCK_GOALS = {
     "goals": [
         {
-            id: "1111",
-            goal: "Spend less than $500 this month on food"
+            "id": "1111",
+            "goal": "Spend less than $500 this month on food"
         },
         {
-            id: "2222",
-            goal: "Only buy paper towels once this month"
+            "id": "2222",
+            "goal": "Only buy paper towels once this month"
         },
         {
-            id: "3333",
-            goal: "Meet 50% of purchase predictions"
+            "id": "3333",
+            "goal": "Meet 50% of purchase predictions"
         }
     ]
 };
