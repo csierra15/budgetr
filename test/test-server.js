@@ -18,14 +18,4 @@ describe('index page', function () {
   });
 });
 
-describe('landing page', function () {
-    it('should exist', function () {
-      return chai.request(app)
-        .get('/signup.html')
-        .then(function (res) {
-          res.should.have.status(200);
-        });
-    });
-  });
-
   
