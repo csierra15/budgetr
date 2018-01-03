@@ -14,6 +14,24 @@
     
     <p>Here's an example of what you can do with the app!</p>
 
+    <button class="login">Log In</button>
+
+    <button class="register">Register</button>
+
+    <form class="signupForm" action="#">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="email" placeholder="myusername">
+
+        <label for="password">Enter Password</label>
+        <input type="password" name="password" id="password" placeholder="mypassword">
+
+        <label for="reenterPassword"></label>
+        <label for="confirmPassword">Retype Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="mypassword">
+
+        <button type="submit">Submit</button>
+        <p>Already have an account? <a href="#">Log in</a></p>
+
     <h1 class="month"></h1>
 
     <h2 class="goalHeader">Goals</h2>
@@ -37,6 +55,46 @@
     <h2 class="totalHeader">Total Budget</h2>
     <p>(Income - Expenses)</p>
     <div class="budgetData"></div>
+
+    <h1>New Transaction</h1>
+    <form action="#" class="transForm">
+        <label for="item">Item Name</label>
+        <input type="text" name="item" id="item" placeholder="Eggs">
+
+        <label for="cost">Cost</label>
+        <input type="text" name="cost" id="cost" placeholder="$3.25">
+
+        <label for="quantity">Quantity Purchased</label>
+        <input type="text" name="quantity" id="quantity" placeholder="1 dozen">
+
+        <label for="purchased">Date Purchased</label>
+        <input type="text" name="purchased" id="purchased" placeholder="10/01/17">
+
+        <label for="exToPurchase">When do you expect to purchase next?</label>
+        <input type="text" name="exToPurchase" id="exToPurchase" placeholder="11/20/17">
+
+        <p>Select a category:</p>
+
+        <input type="radio" name="category" id="incomeRadio">
+        <label for="incomeRadio">Income</label>
+
+        <input type="radio" name="category" id="foodRadio">
+        <label for="foodRadio">Food</label>
+
+        <input type="radio" name="category" id="enterRadio">
+        <label for="enterRadio">Entertainment</label>
+
+        <input type="radio" name="category" id="emerRadio">
+        <label for="emerRadio">Emergency</label>
+
+        <input type="radio" name="category" id="billsRadio">
+        <label for="billsRadio">Bills</label>
+
+        <input type="radio" name="category" id="perCareRadio">
+        <label for="perCareRadio">Personal Care</label>
+
+        <button type="submit">Submit</button>
+    </form>
     
 
     <canvas id="displayData" width="400" height="400"></canvas>

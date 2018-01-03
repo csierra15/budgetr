@@ -77,8 +77,8 @@ function getExpenses() {
 function displayExpenses() {
     console.log('displayExpenses ran');
     const newHtml = expenses.map(expense => {
-        return 
-            `<tr>` +
+        return `
+            <tr>` +
                 `<td id="item">${expense.item}</td>` + 
                 `<td id="cost">$${expense.cost.toFixed(2)}</td>` +
                 `<td id="quantity">${expense.quantity}</td>` +
@@ -87,7 +87,7 @@ function displayExpenses() {
             `</tr>`
     });
 
-    $(".expenseData").append(newHtml);
+    $(".expenseData").html(newHtml);
 }
 
 function getAndDisplayExpenses() {

@@ -2,10 +2,54 @@ body {
     text-align: center;
 }
 
+table {
+    margin: 0 auto;
+}
+
+tr, th, td {
+    border: 1px solid;
+}
+
+.signupForm {
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+input {
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+/*NEW TRANSACTION*/
+
+.transForm {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+input[type=text] {
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+input[type=radio] {
+    display: inline-block;
+}
+
 @media only screen and (min-width: 600px) {
 
 }
 
 @media only screen and (min-width: 768px) {
-    
+    table {
+        margin: 0 auto;
+    }
+
+    tr, th, td {
+        border: 1px solid;
+    }
 }
