@@ -46,7 +46,7 @@ function displayIncome(income) {
         return parseFloat(a) + parseFloat(b);
     });
 
-    $(".incomeData").append(`<p>${totalIncome}</p>`);
+    $(".incomeData").append(`<p>$${totalIncome}</p>`);
 }
 
 function getAndDisplayIncome() {
@@ -55,7 +55,6 @@ function getAndDisplayIncome() {
             displayIncome(income);
         });
 }
-
 
 //===== EXPENSES ======
 
@@ -78,14 +77,17 @@ function getExpenses() {
 function displayExpenses() {
     console.log('displayExpenses ran');
     const newHtml = expenses.map(expense => {
-        return `<h3 class="item">${expense.item}</h3>` + 
-        `<p class="cost">${expense.cost}</p>` +
-        `<p class="quantity">${expense.quantity}</p>` +
-        `<p class="purchaseDate">${expense.purchaseDate}</p>` +
-        `<p class="category">${expense.category}</p>`
+        return 
+            `<tr>` +
+                `<td id="item">${expense.item}</td>` + 
+                `<td id="cost">$${expense.cost.toFixed(2)}</td>` +
+                `<td id="quantity">${expense.quantity}</td>` +
+                `<td id="purchaseDate">${expense.purchaseDate}</td>` +
+                `<td id="category">${expense.category}</td>` +
+            `</tr>`
     });
 
-    $(".expenseData").html(newHtml);
+    $(".expenseData").append(newHtml);
 }
 
 function getAndDisplayExpenses() {
@@ -148,7 +150,7 @@ function calculateBudget() {
 
     const totalBudget = total.toFixed(2);
 
-    $(".budgetData").html(totalBudget);
+    $(".budgetData").html("$" + totalBudget);
 }
 
 $(function() {
