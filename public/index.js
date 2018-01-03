@@ -46,7 +46,7 @@ function displayIncome(income) {
         return parseFloat(a) + parseFloat(b);
     });
 
-    $(".incomeData").append(`<p>$${totalIncome}</p>`);
+    $(".income-data").append(`<p>$${totalIncome}</p>`);
 }
 
 function getAndDisplayIncome() {
@@ -87,7 +87,7 @@ function displayExpenses() {
             `</tr>`
     });
 
-    $(".expenseData").html(newHtml);
+    $(".expense-data").html(newHtml);
 }
 
 function getAndDisplayExpenses() {
@@ -120,8 +120,8 @@ function displayGoals() {
         return `
             <div id="goal">
                 <p>${goal.goal}</p>
-                <button id="editGoal">Edit</button>
-                <button id="completeGoal">Completed</button>
+                <button id="edit-goal">Edit</button>
+                <button id="complete-goal">Completed</button>
             </div>`
     });
 
@@ -150,7 +150,7 @@ function calculateBudget() {
 
     const totalBudget = total.toFixed(2);
 
-    $(".budgetData").html("$" + totalBudget);
+    $(".budget-data").html("$" + totalBudget);
 }
 
 $(function() {
@@ -163,11 +163,11 @@ $(function() {
     });
     getAndDisplayGoals();
     
-    $('body').on('click', '#editGoal', (e) => {
+    $('body').on('click', '#edit-goal', (e) => {
         console.log('You clicked edit');
     });
 
-    $('body').on('click', '#completeGoal', (e) => {
+    $('body').on('click', '#complete-goal', (e) => {
         console.log('You completed a goal!');
         e.preventDefault();
         $('#goal').remove();
