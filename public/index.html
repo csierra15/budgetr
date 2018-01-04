@@ -12,37 +12,40 @@
         <h1>Budget Tracker</h1>
     </header>
     
-    <section class="login-section">
+    <section class="about-section">
         <p>Keep track of your spending!</p>
         <button type="submit" id="login-btn">Log In</button>
         <button type="submit" id="register-btn">Register</button>
-    </section>
 
-    <div class="about">
-        <div class="col-4">
-            <p>Log your purchases</p>
-        </div>
-        <div class="col-4">
-            <p>Set spending and savings goals</p>
-        </div>
-        <div class="col-4">
-            <p>Get the full picture of your money</p>
-        </div>
-    </div>    
+        <div class="about">
+            <div class="col-4">
+                <p>Log your purchases</p>
+            </div>
+            <div class="col-4">
+                <p>Set spending and savings goals</p>
+            </div>
+            <div class="col-4">
+                <p>Get the full picture of your money</p>
+            </div>
+        </div>    
+
+    </section>
 
     <div class="login">
         <form action="#" class="login-form">
             <label for="get-username">Username</label>
-            <input type="text" name="username" id="singnin-email-input" placeholder="myusername">
+            <input type="text" name="username" id="login-email-input" placeholder="myusername">
 
             <label for="password">Password</label>
-            <input type="password" name="password" id="signin-password-input" placeholder="mypassword">
+            <input type="password" name="password" id="login-password-input" placeholder="mypassword">
+
+            <button class="login-submit-btn">Log in</button>
         </form>
         <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
     </div>
 
-    <div class="signup">
-        <form class="signup-form" action="#">
+    <div class="register">
+        <form class="s-form" action="#">
             <label for="username">Username</label>
             <input type="text" name="username" id="signup-email-input" placeholder="myusername">
 
@@ -53,7 +56,7 @@
             <label for="confirmPassword">Retype Password</label>
             <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword">
 
-            <button type="submit">Submit</button>
+            <button type="submit">Sign up!</button>
             <p>Already have an account? <a href="#">Log in</a></p>
     </div>
 
@@ -72,7 +75,7 @@
 
     <section class="expenses-section">
         <h2 class="expenses-header">Expenses</h2>
-        <button type="submit">+ Add Transaction</button>
+        <button id="new-trans-btn" type="submit">+ Add Transaction</button>
         <table class="expense-data">
             <tr>
                 <th>Item</th>

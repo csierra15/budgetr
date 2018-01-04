@@ -148,6 +148,26 @@ function calculateBudget() {
 }
 
 $(function() {
+
+    $('.login').hide();
+    $('.register').hide();
+    $('.new-trans-section').hide();
+
+    $('#login-btn').on('click', e => {
+        e.preventDefault();
+        $('.login').show();
+    });
+
+    $('#register-btn').on('click', e => {
+        e.preventDefault();
+        $('.register').show();
+    });
+
+    $('#new-trans-btn').on('click', e => {
+        e.preventDefault();
+        $('.new-trans-section').show();
+    });
+
     displayMonth()
     Promise.all([
         getAndDisplayIncome(),
