@@ -27,26 +27,18 @@ input[type=radio] {
     display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-@media only screen and (min-width: 600px) {
-
+.editable {
+    border: 1px solid blue;
 }
 
-@media only screen and (min-width: 768px) {
-    table {
-        margin: 0 auto;
-    }
+.goal-form {
+    display: none;
+}
 
-    tr, th, td {
-        border: 1px solid;
-    }
+.editable .goal-form {
+    display: block;
+}
+
+.editable .goal-display {
+    display: none;
 }

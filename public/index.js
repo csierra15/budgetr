@@ -3,23 +3,7 @@
 const MOCK_URL = "https://0407737f-0ddb-4a66-9b90-2e659c4a31ce.mock.pstmn.io";
 
 function displayMonth() {
-    let d = new Date();
-    let month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
-    let n = month[d.getMonth()];
-
-    $(".month").html(n + " Budget");
+    $(".month").prepend(moment().format('MMMM'));
 }
 
 //==== INCOME ====
@@ -87,7 +71,7 @@ function displayExpenses() {
             `</tr>`
     });
 
-    $(".expense-data").html(newHtml);
+    $(".expense-data").append(newHtml);
 }
 
 function getAndDisplayExpenses() {
@@ -97,7 +81,7 @@ function getAndDisplayExpenses() {
         });
 }
 
-//==== GOALS ======
+//===== GOALS ======
 let goals = [];
 
 function processGoalData(goalData) {
@@ -118,11 +102,17 @@ function displayGoals() {
     console.log('displayGoals ran');
     const newHtml = goals.map(goal => {
         return `
-            <div id="goal">
-                <p>${goal.goal}</p>
-                <button id="edit-goal">Edit</button>
-                <button id="complete-goal">Completed</button>
-            </div>`
+            <div class="goals" data-goal_id="${goal.id}">
+                <div class="goal-display">
+                    <p>${goal.goal}</p>
+                    <button class="edit-goal-btn">Edit</button>
+                    <button class="complete-goal">Completed</button>
+                </div>
+                <div class="goal-form">
+                    <input type="text" value="${goal.goal}" id="goal_${goal.id}"/>
+                    <button type="submit" class="update-goal-btn">Submit</button>
+                </div>
+            </div>`    
     });
 
     $(".goals").html(newHtml);
@@ -133,6 +123,10 @@ function getAndDisplayGoals() {
         .then(goals => {
             displayGoals(goals);
         });
+}
+
+function updateGoals() {
+    //update server with PUT endpoint
 }
 
 // ==== CALCULATE BUDGET (income - expenses) ====
@@ -162,15 +156,32 @@ $(function() {
       calculateBudget();
     });
     getAndDisplayGoals();
-    
-    $('body').on('click', '#edit-goal', (e) => {
-        console.log('You clicked edit');
-    });
-
-    $('body').on('click', '#complete-goal', (e) => {
+  
+    $('body').on('click', '.complete-goal', e => {
         console.log('You completed a goal!');
         e.preventDefault();
-        $('#goal').remove();
+        $('.goals').remove();
+    });
+
+    $('.goals').on('click', '.edit-goal-btn', e => {
+        console.log('You completed a goal!');
+        $(".editable").removeClass(".editable");
+        $(e.target).closest(".goals").addClass("editable");
+    });
+
+    $(".goals").on('click', '.update-goal-btn', e => {
+        //1. save the goal locally
+        let goal_id = $(e.target).closest(".goals").data("goal_id");
+        let new_goal = $('#goal_' + goal_id).val();
+        //1.5 validate
+        console.log(goal_id, new_goal);
+        let edited_goal = goals.find(goal => goal.id == goal_id);
+        //1.6 make sure that you did find the goal
+        edited_goal.goal = new_goal;
+        displayGoals();
+        //2. send this change to the server
+        //3. remove the form
+        $('.editable').removeClass('editable');
     });
 });
 

@@ -33,10 +33,10 @@
     <div class="login">
         <form action="#" class="login-form">
             <label for="get-username">Username</label>
-            <input type="text" name="username" id="email" placeholder="myusername">
+            <input type="text" name="username" id="singnin-email-input" placeholder="myusername">
 
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="mypassword">
+            <input type="password" name="password" id="signin-password-input" placeholder="mypassword">
         </form>
         <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
     </div>
@@ -44,20 +44,20 @@
     <div class="signup">
         <form class="signup-form" action="#">
             <label for="username">Username</label>
-            <input type="text" name="username" id="email" placeholder="myusername">
+            <input type="text" name="username" id="signup-email-input" placeholder="myusername">
 
             <label for="password">Enter Password</label>
-            <input type="password" name="password" id="password" placeholder="mypassword">
+            <input type="password" name="password" id="signup-password-input" placeholder="mypassword">
 
             <label for="reenterPassword"></label>
             <label for="confirmPassword">Retype Password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="mypassword">
+            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword">
 
             <button type="submit">Submit</button>
             <p>Already have an account? <a href="#">Log in</a></p>
     </div>
 
-    <h1 class="month"></h1>
+    <h1 class="month"> Budget</h1>
 
     <section class="goal-section">
         <h2 class="goal-header">Goals</h2>
@@ -72,6 +72,7 @@
 
     <section class="expenses-section">
         <h2 class="expenses-header">Expenses</h2>
+        <button type="submit">+ Add Transaction</button>
         <table class="expense-data">
             <tr>
                 <th>Item</th>
@@ -81,12 +82,6 @@
                 <th>Catgory</th>
             </tr>
         </table>
-    </section>
-
-    <section class="total-budget-section">
-        <h2 class="total-header">Total Budget</h2>
-        <p>(Income - Expenses)</p>
-        <div class="budget-data"></div>
     </section>
    
     <section class="new-trans-section">
@@ -131,13 +126,18 @@
         </form>
     </section>
     
-    
+    <section class="total-budget-section">
+            <h2 class="total-header">Total Budget</h2>
+            <p>(Income - Expenses)</p>
+            <div class="budget-data"></div>
+        </section>
 
     <canvas id="displayData" width="400" height="400"></canvas>
     <canvas id="spendingOverTime" width="400" height="400"></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script src="moment.js"></script>   
     <script type="text/javascript" src="index.js"></script>
 
 </body>
