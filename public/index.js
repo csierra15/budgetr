@@ -29,8 +29,20 @@ function displayIncome(income) {
         income.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
-
     $(".income-data").append(`<p>$${totalIncome}</p>`);
+
+    const date = moment().subtract(10, 'days').calendar();
+    const incomeTable = income.map(income => {
+        return `
+            <tr>` + 
+                `<td class="item">${income.description}</td>` +
+                `<td class="amount">$${income.amount.toFixed(2)}</td>` +
+                `<td class="quantity"></td>` +
+                `<td class="purchaseDate">${date}</td>` +
+                `<td class="category">income</td>` +
+            `</tr>`
+    });
+    $(".expense-data").append(incomeTable);
 }
 
 function getAndDisplayIncome() {
@@ -63,15 +75,19 @@ function displayExpenses() {
     const newHtml = expenses.map(expense => {
         return `
             <tr>` +
-                `<td id="item">${expense.item}</td>` + 
-                `<td id="cost">$${expense.cost.toFixed(2)}</td>` +
-                `<td id="quantity">${expense.quantity}</td>` +
-                `<td id="purchaseDate">${expense.purchaseDate}</td>` +
-                `<td id="category">${expense.category}</td>` +
+                `<td class="item">${expense.item}</td>` + 
+                `<td class="amount">$${expense.cost.toFixed(2)}</td>` +
+                `<td class="quantity">${expense.quantity}</td>` +
+                `<td class="purchaseDate">${expense.purchaseDate}</td>` +
+                `<td class="category">${expense.category}</td>` +
             `</tr>`
     });
 
     $(".expense-data").append(newHtml);
+}
+
+function addTransaction() {
+
 }
 
 function getAndDisplayExpenses() {

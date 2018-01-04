@@ -79,10 +79,10 @@
         <table class="expense-data">
             <tr>
                 <th>Item</th>
-                <th>Cost</th>
+                <th>Amount</th>
                 <th>Quantity</th>
                 <th>Date Purchased</th>
-                <th>Catgory</th>
+                <th>Category</th>
             </tr>
         </table>
     </section>
@@ -90,42 +90,31 @@
     <section class="new-trans-section">
         <h1>New Transaction</h1>
         <form action="#" class="trans-form">
+            <label for="select-type">Select Type</label>
+            <select name="select-type" id="select-type-trans">
+                <option value="+/-">+/-</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+            </select>
+
             <label for="item">Item Name</label>
             <input type="text" name="item" id="item" placeholder="Eggs">
     
-            <label for="cost">Cost</label>
+            <label for="cost">Amount</label>
             <input type="text" name="cost" id="cost" placeholder="$3.25">
     
             <label for="quantity">Quantity Purchased</label>
             <input type="text" name="quantity" id="quantity" placeholder="1 dozen">
     
             <label for="purchased">Date Purchased</label>
-            <input type="text" name="purchased" id="purchased" placeholder="10/01/17">
+            <input type="text" name="purchased" id="purchased" placeholder="MM/DD/YYYY">
     
             <label for="exToPurchase">When do you expect to purchase next?</label>
-            <input type="text" name="exToPurchase" id="exToPurchase" placeholder="11/20/17">
+            <input type="text" name="exToPurchase" id="exToPurchase" placeholder="MM/DD/YYYY">
     
-            <p>Select a category:</p>
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" placeholder="Groceries">
     
-            <input type="radio" name="category" id="incomeRadio">
-            <label for="incomeRadio">Income</label>
-    
-            <input type="radio" name="category" id="foodRadio">
-            <label for="foodRadio">Food</label>
-    
-            <input type="radio" name="category" id="enterRadio">
-            <label for="enterRadio">Entertainment</label>
-    
-            <input type="radio" name="category" id="emerRadio">
-            <label for="emerRadio">Emergency</label>
-    
-            <input type="radio" name="category" id="billsRadio">
-            <label for="billsRadio">Bills</label>
-    
-            <input type="radio" name="category" id="perCareRadio">
-            <label for="perCareRadio">Personal Care</label>
-    
-            <button type="submit">Submit</button>
         </form>
     </section>
     
