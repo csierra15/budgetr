@@ -12,12 +12,12 @@
         <h1>Budget Tracker</h1>
     </header>
     
-    <section class="about-section">
+    <section id="about-section">
         <p>Keep track of your spending!</p>
         <button type="submit" id="login-btn">Log In</button>
         <button type="submit" id="register-btn">Register</button>
 
-        <div class="about">
+        <div id="about">
             <div class="col-4">
                 <p>Log your purchases</p>
             </div>
@@ -31,7 +31,7 @@
 
     </section>
 
-    <div class="login">
+    <div id="login">
         <form action="#" class="login-form">
             <label for="get-username">Username</label>
             <input type="text" name="username" id="login-email-input" placeholder="myusername">
@@ -44,7 +44,7 @@
         <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
     </div>
 
-    <div class="register">
+    <div id="register">
         <form class="s-form" action="#">
             <label for="username">Username</label>
             <input type="text" name="username" id="signup-email-input" placeholder="myusername">
@@ -83,14 +83,13 @@
             <tr>
                 <th>Item</th>
                 <th>Amount</th>
-                <th>Quantity</th>
-                <th>Date Purchased</th>
+                <th>Date</th>
                 <th>Category</th>
             </tr>
         </table>
     </section>
    
-    <section class="new-trans-section">
+    <section id="new-trans-section">
         <h1>New Transaction</h1>
         <form action="#" class="trans-form">
             <label for="select-type">Select Type</label>
@@ -101,22 +100,19 @@
             </select>
 
             <label for="item">Item Name</label>
-            <input type="text" name="item" id="item" placeholder="Eggs">
+            <input type="text" name="item" id="item-input" placeholder="1 dozen eggs" value="eggs">
     
             <label for="cost">Amount</label>
-            <input type="text" name="cost" id="cost" placeholder="$3.25">
+            <input type="text" name="amount" id="amount-input" placeholder="$3.25" value="3.25">
     
-            <label for="quantity">Quantity Purchased</label>
-            <input type="text" name="quantity" id="quantity" placeholder="1 dozen">
-    
-            <label for="purchased">Date Purchased</label>
-            <input type="text" name="purchased" id="purchased" placeholder="MM/DD/YYYY">
-    
-            <label for="exToPurchase">When do you expect to purchase next?</label>
-            <input type="text" name="exToPurchase" id="exToPurchase" placeholder="MM/DD/YYYY">
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" value="01/08/2018">
     
             <label for="category">Category</label>
-            <input type="text" name="category" id="category" placeholder="Groceries">
+            <input type="text" name="category" id="category-input" placeholder="Food" value="food">
+
+            <button type="submit" id="submit-new-trans">Submit</button>
+            <button type="reset" class="cancel-btn">Cancel</button>
     
         </form>
     </section>

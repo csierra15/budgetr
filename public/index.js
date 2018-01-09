@@ -37,7 +37,6 @@ function displayIncome(income) {
             <tr>` + 
                 `<td class="item">${income.description}</td>` +
                 `<td class="amount">$${income.amount.toFixed(2)}</td>` +
-                `<td class="quantity"></td>` +
                 `<td class="purchaseDate">${date}</td>` +
                 `<td class="category">income</td>` +
             `</tr>`
@@ -77,7 +76,6 @@ function displayExpenses() {
             <tr>` +
                 `<td class="item">${expense.item}</td>` + 
                 `<td class="amount">$${expense.cost.toFixed(2)}</td>` +
-                `<td class="quantity">${expense.quantity}</td>` +
                 `<td class="purchaseDate">${expense.purchaseDate}</td>` +
                 `<td class="category">${expense.category}</td>` +
             `</tr>`
@@ -87,7 +85,24 @@ function displayExpenses() {
 }
 
 function addTransaction() {
-
+    let item = $('#item-input').val();
+    let amount = $('#amount-input').val();
+    let date = $('#date-input').val();
+    let category = $('#category-input').val();
+    const newTransaction = 
+        {item: item,
+        cost: amount,
+        purchaseDate: date,
+        category: category}
+    $.ajax({
+        type: 'POST',
+        url: MOCK_URL + '/expenses',
+        data: newTransaction,
+        success: displayExpenses,
+        error: (err) => {
+            $('#new-trans-section').append(`<p>Couldn't add transaction :(`);
+        }
+    });
 }
 
 function getAndDisplayExpenses() {
@@ -165,23 +180,29 @@ function calculateBudget() {
 
 $(function() {
 
-    $('.login').hide();
-    $('.register').hide();
-    $('.new-trans-section').hide();
+    $('#login').hide();
+    $('#register').hide();
+    $('#new-trans-section').hide();
 
     $('#login-btn').on('click', e => {
         e.preventDefault();
-        $('.login').show();
+        $('#login').show();
     });
 
     $('#register-btn').on('click', e => {
         e.preventDefault();
-        $('.register').show();
+        $('#register').show();
     });
 
     $('#new-trans-btn').on('click', e => {
         e.preventDefault();
-        $('.new-trans-section').show();
+        $('#new-trans-section').show();
+    });
+
+    $('#submit-new-trans').on('click', e => {
+        e.preventDefault();
+        addTransaction();
+        $('#new-trans-section').hide();
     });
 
     displayMonth()
