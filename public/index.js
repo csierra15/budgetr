@@ -1,13 +1,13 @@
 'use strict';
 
-const MOCK_URL = "https://0407737f-0ddb-4a66-9b90-2e659c4a31ce.mock.pstmn.io";
+const MOCK_URL = "http://localhost:8080";
 
 function displayMonth() {
-    $(".month").prepend(moment().format('MMMM'));
+    $(".month").prepend(moment().format('MMMM YYYY'));
 }
 
 //==== INCOME ====
-let income = [];
+/*let income = [];
 
 function processIncomeData(incomeData) {
     income = Object.values(incomeData.income);
@@ -23,15 +23,14 @@ function getIncome() {
         });
 }
 
-function displayIncome(income) {
+function calcIncome(income) {
     console.log('displayIncome ran');
     const totalIncome = income.map(income => 
         income.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
-    $(".income-data").append(`<p>$${totalIncome}</p>`);
 
-    const date = moment().subtract(10, 'days').calendar();
+    /*const date = moment().subtract(10, 'days').calendar();
     const incomeTable = income.map(income => {
         return `
             <tr>` + 
@@ -47,48 +46,54 @@ function displayIncome(income) {
 function getAndDisplayIncome() {
     return getIncome()
         .then(income => {
-            displayIncome(income);
+            calcIncome(income);
         });
-}
+}*/
 
-//===== EXPENSES ======
+//===== TRANSACTIONS ======
 
-let expenses = [];
+let transactions = [];
 
-function processExpenseData(expenseData) {
-    expenses = Object.values(expenseData.expenses);
+function processTransactionData(transactionData) {
+    transactions = Object.values(transactionData.transactions);
     return expenses;
 }
+// GET /expenses - return list of transactions for current month
+// GET /expenses/:date - return list of transactions for selected month
 
-function getExpenses() {
-    return fetch(MOCK_URL + "/expenses")
+function getTransactions() {
+    return fetch(MOCK_URL + "/transactions")
         .then(data => data.json())
         .then(data => {
-            expenses = data;
+            transactions = data;
             return data;
         });
 }
 
-function displayExpenses() {
-    console.log('displayExpenses ran');
-    const newHtml = expenses.map(expense => {
+function displayTransactions() {
+    console.log('displayTransactions ran');
+    const newHtml = transactions.map(transaction => {
         return `
             <tr>` +
-                `<td class="item">${expense.item}</td>` + 
-                `<td class="amount">$${expense.cost.toFixed(2)}</td>` +
-                `<td class="purchaseDate">${expense.purchaseDate}</td>` +
-                `<td class="category">${expense.category}</td>` +
+                `<td class="description">${transaction.description}</td>` + 
+                `<td class="amount">$${parseFloat(transaction.amount.toFixed(2))}</td>` +
+                `<td class="purchaseDate">${transaction.date}</td>` +
+                `<td class="category">${transaction.category}</td>` +
             `</tr>`
     });
 
-    $(".expense-data").append(newHtml);
+    $(".expense-data tbody").html(newHtml);
 }
 
 function addTransaction() {
-    let item = $('#item-input').val();
+    let description = $('#description-input').val();
     let amount = $('#amount-input').val();
     let date = $('#date-input').val();
-    let category = $('#category-input').val();
+    //let category = $('#category-input').val();
+    let type = $('#select-type-trans').val();
+    if(type === '0'){
+        $('#select-type-trans').append(`<p>Please select transaction type</p>`);
+    }
     const newTransaction = 
         {item: item,
         cost: amount,
@@ -98,9 +103,12 @@ function addTransaction() {
         type: 'POST',
         url: MOCK_URL + '/expenses',
         data: newTransaction,
-        success: displayExpenses,
+        success: transaction => {
+            expenses.push(transaction);
+            displayExpenses();
+        },
         error: (err) => {
-            $('#new-trans-section').append(`<p>Couldn't add transaction :(`);
+            $('#new-trans-section').append(`<p>Couldn't add transaction :(</p>`);
         }
     });
 }

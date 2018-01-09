@@ -80,12 +80,15 @@
         <h2 class="expenses-header">Transactions</h2>
         <button id="new-trans-btn" type="submit">+ Add Transaction</button>
         <table class="expense-data">
-            <tr>
-                <th>Item</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Category</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
     </section>
    
@@ -94,7 +97,7 @@
         <form action="#" class="trans-form">
             <label for="select-type">Select Type</label>
             <select name="select-type" id="select-type-trans">
-                <option value="+/-">+/-</option>
+                <option value="0">+/-</option>
                 <option value="+">+</option>
                 <option value="-">-</option>
             </select>

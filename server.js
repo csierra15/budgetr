@@ -25,6 +25,47 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
+app.get('/transactions', function(req,res) {
+    res.json(json.stringify(
+        {
+            id: "111",
+            description: "groceries",
+            amount: "100",
+            date: "01/01/2018",
+            category: "expense"
+        },
+        {
+            id: "222",
+            description: "movie tickets",
+            amount: "20",
+            date: "01/02/2018",
+            category: "expense"
+        },
+        {
+            id: "333",
+            description: "paycheck",
+            amount: "250",
+            date: "01/03/2018",
+            category: "income"
+        },
+        {
+            id: "444",
+            description: "Christmas money from Grandma",
+            amount: "100",
+            date: "01/01/2018",
+            category: "income"
+        },
+        {
+            id: "555",
+            description: "restaurant",
+            amount: "9",
+            date: "01/01/2018",
+            category: "expense"
+        }
+    ));
+});
+
+
 
 app.get('/', function(req, res) {
     res.json({'message': 'answer'});
