@@ -67,8 +67,18 @@
 
     <section class="goal-section">
         <h2 class="goal-header">Goals</h2>
-        <button class="new-goal">+ Add a new goal</button>
+        <button class="new-goal-btn">+ Add a new goal</button>
         <div class="goals"></div>
+    </section>
+
+    <section id="new-goal-section">
+        <form action="#" id-"new-goal-form">
+            <label for="goal-input"></label>
+            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
+
+            <button type="submit" id="submit-goal-btn">Submit</button>
+            <button type="reset" id="cancel-goal-btn">Cancel</button>
+        </form>
     </section>
 
     <!-- <section class="income-section">
@@ -76,8 +86,8 @@
         <div class="income-data"></div>
     </section>-->
 
-    <section class="expenses-section">
-        <h2 class="expenses-header">Transactions</h2>
+    <section class="transaction-section">
+        <h2 class="transaction-header">Transactions</h2>
         <button id="new-trans-btn" type="submit">+ Add Transaction</button>
         <table class="expense-data">
             <thead>
@@ -96,11 +106,13 @@
         <h1>New Transaction</h1>
         <form action="#" class="trans-form">
             <label for="select-type">Select Type</label>
-            <select name="select-category" id="select-category">
+            <select name="select-type" id="select-category">
                 <option value="0">+/-</option>
                 <option value="+">+</option>
                 <option value="-">-</option>
             </select>
+
+            <p id="select-cat-message">Please select a category</p>
 
             <label for="description">Description</label>
             <input type="text" name="description" id="description-input" placeholder="groceries" value="eggs">
@@ -112,7 +124,7 @@
             <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" value="01/08/2018">
 
             <button type="submit" id="submit-new-trans">Submit</button>
-            <button type="reset" class="cancel-btn">Cancel</button>
+            <button type="reset" id="cancel-trans-btn">Cancel</button>
     
         </form>
     </section>

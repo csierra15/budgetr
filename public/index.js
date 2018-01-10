@@ -86,17 +86,24 @@ function displayTransactions() {
     $(".expense-data tbody").html(newHtml);
 }
 
+function getAndDisplayTransactions() {
+    return getTransactions()
+        .then(transactions => {
+            displayTransactions(transactions);
+        });
+}
+
 function addTransaction() {
     let description = $('#description-input').val();
     let amount = $('#amount-input').val();
     let date = $('#date-input').val();
-    let categoryInput = $('#select-category').val();
+    let category;
 
+    let categoryInput = $('#select-category').val();
     if(categoryInput === '+'){
-        const category = 'income';
-    }
-    if(categoryInput === '-'){
-        const category = 'expense';
+        category = 'income';
+    }else if (categoryInput === '-'){
+        category = 'expense';
     }
     const newTransaction = 
         {description: description,
@@ -107,23 +114,18 @@ function addTransaction() {
     $.ajax({
         type: 'POST',
         url: MOCK_URL + '/transactions',
-        data: newTransaction,
+        contentType: 'application/JSON',
+        data: JSON.stringify(newTransaction),
         success: transaction => {
+            console.log(transaction);
             transactions.push(transaction);
             displayTransactions();
-            calculateBudget;
+            calculateBudget();
         },
         error: (err) => {
-            $('#select-category').append(`<p>Couldn't add transaction :(</p>`);
+            $('#new-trans-section').append(`<p>Couldn't add transaction :(</p>`);
         }
     });
-}
-
-function getAndDisplayTransactions() {
-    return getTransactions()
-        .then(transactions => {
-            displayTransactions(transactions);
-        });
 }
 
 //===== GOALS ======
@@ -155,7 +157,7 @@ function displayGoals() {
                 </div>
                 <div class="goal-form">
                     <input type="text" value="${goal.goal}" id="goal_${goal.id}"/>
-                    <button type="submit" class="update-goal-btn">Submit</button>
+                    <button type="submit" class="update-goal-btn">Save</button>
                 </div>
             </div>`    
     });
@@ -170,8 +172,31 @@ function getAndDisplayGoals() {
         });
 }
 
+function addGoal() {
+    let goal= $('#goal-input').val();
+
+    $.ajax({
+        type: 'POST',
+        url: MOCK_URL + '/goals',
+        contentType: 'application/JSON',
+        data: JSON.stringify({goal: goal}),
+        success: newGoal => {
+            console.log(newGoal);
+            goals.push(newGoal);
+            displayGoals();
+        },
+        error: (err) => {
+            $('#new-goal-section').append(`<p>Couldn't add goal :(</p>`);
+        }
+    });
+}
+
 function updateGoals() {
     //update server with PUT endpoint
+}
+
+function deleteGoal(){
+
 }
 
 // ==== CALCULATE BUDGET (income - expenses) ====
@@ -197,6 +222,8 @@ $(function() {
     $('#login').hide();
     $('#register').hide();
     $('#new-trans-section').hide();
+    $('#new-goal-section').hide();
+    $('#select-cat-message').hide();
 
     $('#login-btn').on('click', e => {
         e.preventDefault();
@@ -213,16 +240,33 @@ $(function() {
         $('#new-trans-section').show();
     });
 
-    $('#submit-new-trans').on('click', e => {
-        if($('#select-category').val() !== '0'){
+    $('.trans-form').submit( e => {
+        if($('#select-category').val() === '0'){
+            $('#select-cat-message').show();
+            e.preventDefault();
+        }else{
             e.preventDefault();
             addTransaction();
+            $('#select-cat-message').hide();
             $('#new-trans-section').hide();
         }
+    });
+
+    $('#cancel-trans-btn').on('click', e => {
+        $('#new-trans-section').hide();
+    });
+
+    $('#new-goal-btn').on('click', e => {
         e.preventDefault();
-        $('#select-type-trans').append(`<p>Please select transaction type</p>`);
-      
-        
+        $('#new-goal-section').show();
+    });
+
+    $('#submit-goal-btn').on('click', e => {
+        e.preventDefault();
+    })
+
+    $('#cancel-goal-btn').on('click', e => {
+        $('#new-goal-section').hide();
     });
 
     displayMonth()

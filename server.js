@@ -67,6 +67,7 @@ app.get('/transactions', function(req,res) {
 
 app.post('/transactions', function(req, res) {
     let transaction = req.body;
+    console.log(req.body);
     let mockId = "1112";
     transaction.id = mockId;
     res.json.stringify(transaction);

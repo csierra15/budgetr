@@ -14,17 +14,12 @@ input {
 /*NEW TRANSACTION*/
 
 .trans-form {
-    text-align: center;
     padding: 10px;
 }
 
 input[type=text] {
     display: block;
     padding: 5px;
-}
-
-input[type=radio] {
-    display: inline-block;
 }
 
 .editable {
