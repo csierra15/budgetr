@@ -73,10 +73,11 @@ function getTransactions() {
 function displayTransactions() {
     console.log('displayTransactions ran');
     const newHtml = transactions.map(transaction => {
+        let amount = parseFloat(transaction.amount).toFixed(2);
         return `
             <tr>` +
                 `<td class="description">${transaction.description}</td>` + 
-                `<td class="amount">$${parseFloat(transaction.amount.toFixed(2))}</td>` +
+                `<td class="amount">$${amount}</td>` +
                 `<td class="purchaseDate">${transaction.date}</td>` +
                 `<td class="category">${transaction.category}</td>` +
             `</tr>`
@@ -89,34 +90,39 @@ function addTransaction() {
     let description = $('#description-input').val();
     let amount = $('#amount-input').val();
     let date = $('#date-input').val();
-    //let category = $('#category-input').val();
-    let type = $('#select-type-trans').val();
-    if(type === '0'){
-        $('#select-type-trans').append(`<p>Please select transaction type</p>`);
+    let categoryInput = $('#select-category').val();
+
+    if(categoryInput === '+'){
+        const category = 'income';
+    }
+    if(categoryInput === '-'){
+        const category = 'expense';
     }
     const newTransaction = 
-        {item: item,
-        cost: amount,
-        purchaseDate: date,
-        category: category}
+        {description: description,
+        amount: amount,
+        date: date,
+        category: category};
+    console.log(newTransaction);
     $.ajax({
         type: 'POST',
-        url: MOCK_URL + '/expenses',
+        url: MOCK_URL + '/transactions',
         data: newTransaction,
         success: transaction => {
-            expenses.push(transaction);
-            displayExpenses();
+            transactions.push(transaction);
+            displayTransactions();
+            calculateBudget;
         },
         error: (err) => {
-            $('#new-trans-section').append(`<p>Couldn't add transaction :(</p>`);
+            $('#select-category').append(`<p>Couldn't add transaction :(</p>`);
         }
     });
 }
 
-function getAndDisplayExpenses() {
-    return getExpenses()
-        .then(expenses => {
-            displayExpenses(expenses);
+function getAndDisplayTransactions() {
+    return getTransactions()
+        .then(transactions => {
+            displayTransactions(transactions);
         });
 }
 
@@ -171,11 +177,11 @@ function updateGoals() {
 // ==== CALCULATE BUDGET (income - expenses) ====
 
 function calculateBudget() {
-    const totalExpenses = expenses.map(expense => expense.cost).reduce((a, b) => {
+    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
 
-    const totalIncome = income.map(income => income.amount).reduce((a, b) => {
+    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(income => income.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
     });
 
@@ -208,35 +214,41 @@ $(function() {
     });
 
     $('#submit-new-trans').on('click', e => {
+        if($('#select-category').val() !== '0'){
+            e.preventDefault();
+            addTransaction();
+            $('#new-trans-section').hide();
+        }
         e.preventDefault();
-        addTransaction();
-        $('#new-trans-section').hide();
+        $('#select-type-trans').append(`<p>Please select transaction type</p>`);
+      
+        
     });
 
     displayMonth()
     Promise.all([
-        getAndDisplayIncome(),
-        getAndDisplayExpenses()
+        getAndDisplayTransactions()
     ]).then(() => {
       calculateBudget();
     });
     getAndDisplayGoals();
   
-    $('body').on('click', '.complete-goal', e => {
+    $('.goals').on('click', '.complete-goal', e => {
         console.log('You completed a goal!');
         e.preventDefault();
-        $('.goals').remove();
+        $(e.target).closest('.goals').remove();
     });
 
     $('.goals').on('click', '.edit-goal-btn', e => {
         console.log('You completed a goal!');
-        $(".editable").removeClass(".editable");
-        $(e.target).closest(".goals").addClass("editable");
+        e.preventDefault();
+        $('.editable').removeClass('.editable');
+        $(e.target).closest(".goals").addClass('editable');
     });
 
-    $(".goals").on('click', '.update-goal-btn', e => {
+    $('.goals').on('click', '.update-goal-btn', e => {
         //1. save the goal locally
-        let goal_id = $(e.target).closest(".goals").data("goal_id");
+        let goal_id = $(e.target).closest('.goals').data('goal_id');
         let new_goal = $('#goal_' + goal_id).val();
         //1.5 validate
         console.log(goal_id, new_goal);

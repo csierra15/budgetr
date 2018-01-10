@@ -26,46 +26,68 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 
 app.get('/transactions', function(req,res) {
-    res.json(json.stringify(
-        {
-            id: "111",
-            description: "groceries",
-            amount: "100",
-            date: "01/01/2018",
-            category: "expense"
+    res.json(
+        [{
+            "id": "111",
+            "description": "groceries",
+            "amount": "100",
+            "date": "01/01/2018",
+            "category": "expense"
         },
         {
-            id: "222",
-            description: "movie tickets",
-            amount: "20",
-            date: "01/02/2018",
-            category: "expense"
+            "id": "222",
+            "description": "movie tickets",
+            "amount": "20",
+            "date": "01/02/2018",
+            "category": "expense"
         },
         {
-            id: "333",
-            description: "paycheck",
-            amount: "250",
-            date: "01/03/2018",
-            category: "income"
+            "id": "333",
+            "description": "paycheck",
+            "amount": "250",
+            "date": "01/03/2018",
+            "category": "income"
         },
         {
-            id: "444",
-            description: "Christmas money from Grandma",
-            amount: "100",
-            date: "01/01/2018",
-            category: "income"
+            "id": "444",
+            "description": "Christmas money from Grandma",
+            "amount": "100",
+            "date": "01/01/2018",
+            "category": "income"
         },
         {
-            id: "555",
-            description: "restaurant",
-            amount: "9",
-            date: "01/01/2018",
-            category: "expense"
-        }
-    ));
+            "id": "555",
+            "description": "restaurant",
+            "amount": "9",
+            "date": "01/01/2018",
+            "category": "expense"
+        }]
+    );
 });
 
+app.post('/transactions', function(req, res) {
+    let transaction = req.body;
+    let mockId = "1112";
+    transaction.id = mockId;
+    res.json.stringify(transaction);
+})
 
+app.get('/goals', function(req, res) {
+    res.json(
+       [{
+            "id": "1111",
+            "goal": "Spend less than $500 this month on food"
+        },
+        {
+            "id": "2222",
+            "goal": "Only buy paper towels once this month"
+        },
+        {
+            "id": "3333",
+            "goal": "Meet 50% of purchase predictions"
+        }]
+    );
+});
 
 app.get('/', function(req, res) {
     res.json({'message': 'answer'});

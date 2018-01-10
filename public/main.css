@@ -28,7 +28,11 @@ input[type=radio] {
 }
 
 .editable {
-    border: 1px solid blue;
+    width: 33%;
+}
+
+.editable input{
+    width: 50%;
 }
 
 .goal-form {
