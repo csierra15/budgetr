@@ -1,0 +1,43 @@
+table, tr, th, td {
+    border: 1px solid;
+}
+
+.signup-form {
+    padding: 10px;
+}
+
+input {
+    display: block;
+    padding: 5px;
+}
+
+/*NEW TRANSACTION*/
+
+.trans-form {
+    padding: 10px;
+}
+
+input[type=text] {
+    display: block;
+    padding: 5px;
+}
+
+.editable {
+    width: 33%;
+}
+
+.editable input{
+    width: 50%;
+}
+
+.goal-form {
+    display: none;
+}
+
+.editable .goal-form {
+    display: block;
+}
+
+.editable .goal-display {
+    display: none;
+}

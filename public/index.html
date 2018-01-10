@@ -4,11 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Budgetr</title>
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-    <h1>Welcome to budgetr!</h1>
-        <p>hello world! Budgetr is an app in progress, and when it is done will allow you to track your purchases and set spending goals. </p>
-        <p>Here's an example of what the app will look like!</p>
+    <header>
+        <h1>Budget Tracker</h1>
+    </header>
+    
+    <section id="about-section">
+        <p>Keep track of your spending!</p>
+        <button type="submit" id="login-btn">Log In</button>
+        <button type="submit" id="register-btn">Register</button>
+
+        <div id="about">
+            <div class="col-4">
+                <p>Log your purchases</p>
+            </div>
+            <div class="col-4">
+                <p>Set spending and savings goals</p>
+            </div>
+            <div class="col-4">
+                <p>Get the full picture of your money</p>
+            </div>
+        </div>    
+
+    </section>
+
+    <div id="login">
+        <form action="#" class="login-form">
+            <label for="get-username">Username</label>
+            <input type="text" name="username" id="login-email-input" placeholder="myusername">
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="login-password-input" placeholder="mypassword">
+
+            <button class="login-submit-btn">Log in</button>
+        </form>
+        <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
+    </div>
+
+    <div id="register">
+        <form class="s-form" action="#">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="signup-email-input" placeholder="myusername">
+
+            <label for="password">Enter Password</label>
+            <input type="password" name="password" id="signup-password-input" placeholder="mypassword">
+
+            <label for="reenterPassword"></label>
+            <label for="confirmPassword">Retype Password</label>
+            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword">
+
+            <button type="submit">Sign up!</button>
+            <p>Already have an account? <a href="#">Log in</a></p>
+    </div>
+
+    <section class="total-budget-section">
+        <h1 class="month"> Budget</h1>
+        <div class="budget-data"></div>
+    </section>
+
+    <section class="goal-section">
+        <h2 class="goal-header">Goals</h2>
+        <div class="goals"></div>
+        <button id="new-goal-btn">+ Add a new goal</button>
+    </section>
+
+    <section id="new-goal-section">
+        <form action="#" id-"new-goal-form">
+            <label for="goal-input"></label>
+            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
+
+            <button type="submit" id="submit-goal-btn">Submit</button>
+            <button type="reset" id="cancel-goal-btn">Cancel</button>
+        </form>
+    </section>
+
+    <!-- <section class="income-section">
+        <h2 class="income-header">Income</h2>
+        <div class="income-data"></div>
+    </section>-->
+
+    <section class="transaction-section">
+        <h2 class="transaction-header">Transactions</h2>
+        <button id="new-trans-btn" type="submit">+ Add Transaction</button>
+        <table class="expense-data">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+   
+    <section id="new-trans-section">
+        <h1>New Transaction</h1>
+        <form action="#" class="trans-form">
+            <label for="select-type">Select Type</label>
+            <select name="select-type" id="select-category">
+                <option value="0">+/-</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+            </select>
+
+            <p id="select-cat-message">Please select a category</p>
+
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description-input" placeholder="groceries" value="eggs">
+    
+            <label for="cost">Amount</label>
+            <input type="text" name="amount" id="amount-input" placeholder="$3.25" value="3.25">
+    
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" value="01/08/2018">
+
+            <button type="submit" id="submit-new-trans">Submit</button>
+            <button type="reset" id="cancel-trans-btn">Cancel</button>
+    
+        </form>
+    </section>
+
+    <canvas id="displayData" width="400" height="400"></canvas>
+    <canvas id="spendingOverTime" width="400" height="400"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script src="moment.js"></script>   
+    <script type="text/javascript" src="index.js"></script>
+
 </body>
 </html>
