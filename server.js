@@ -70,8 +70,8 @@ app.post('/transactions', function(req, res) {
     console.log(req.body);
     let mockId = "1112";
     transaction.id = mockId;
-    res.json.stringify(transaction);
-})
+    res.json(transaction);
+});
 
 app.get('/goals', function(req, res) {
     res.json(
@@ -89,6 +89,13 @@ app.get('/goals', function(req, res) {
         }]
     );
 });
+
+app.post('/goals', function(req, res) {
+    let goal = req.body;
+    let mockId = "12345";
+    goal.id = mockId,
+    res.json(goal);
+})
 
 app.get('/', function(req, res) {
     res.json({'message': 'answer'});

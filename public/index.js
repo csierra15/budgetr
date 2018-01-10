@@ -263,6 +263,8 @@ $(function() {
 
     $('#submit-goal-btn').on('click', e => {
         e.preventDefault();
+        addGoal();
+        $('#new-goal-section').hide();
     })
 
     $('#cancel-goal-btn').on('click', e => {
