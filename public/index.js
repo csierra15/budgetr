@@ -136,7 +136,7 @@ function getAndDisplayGoals() {
 
 function addGoal() {
     let goal= $('#goal-input').val();
-
+    
     $.ajax({
         type: 'POST',
         url: '/goals',
