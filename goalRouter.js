@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     Goals
         .find()
         .then(goals => {
-            res.json(goals.map(transaction => goal.serialize()));
+            res.json(goals.map(goal => goal.serialize()));
         })
         .catch(err => {
             console.error(err);
