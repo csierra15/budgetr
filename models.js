@@ -33,16 +33,7 @@ goalSchema.methods.serialize = function() {
     };
 };
 
-const goalSchema = mongoose.Schema ({
-    name: {type: String, required: true},
-    state: {type: String, required: true},
-    city: {type: String, required: true},
-    products: [{
-        aisle: {type: String, required: true}
-    }]
-});
-
-const Transactions = mongoose.model('Transaction', incomeSchema);
-const Goals = mongoose.model('Goal', GoalSchema);
+const Transactions = mongoose.model('Transaction', transactionSchema);
+const Goals = mongoose.model('Goal', goalSchema);
 
 module.exports = { Transactions, Goals };

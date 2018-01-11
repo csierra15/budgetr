@@ -25,7 +25,13 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
-app.get('/transactions', function(req,res) {
+const { router: transactionRouter } = require('./transactionRouter');
+const { router: goalRouter } = require('./goalRouter');
+
+app.use('/transactions', transactionRouter);
+app.use('/goals', goalRouter)
+
+/*app.get('/transactions', function(req,res) {
     res.json(
         [{
             "id": "111",
@@ -100,6 +106,7 @@ app.post('/goals', function(req, res) {
 app.get('/', function(req, res) {
     res.json({'message': 'answer'});
 });
+*/
 
 let server;
 
