@@ -93,7 +93,6 @@ describe('Transaction API resource', function() {
                     res.body.should.include.keys('id', 'description', 'amount', 'date', 'category');
                     res.body.description.should.equal(newTransaction.description);
                     res.body.id.should.not.be.null;
-                    res.body.should.have.length.of.at.least(1);
                 });
           });
       });
