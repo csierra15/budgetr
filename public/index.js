@@ -1,54 +1,8 @@
 'use strict';
 
-const MOCK_URL = "http://localhost:8080";
-
 function displayMonth() {
     $(".month").prepend(moment().format('MMMM YYYY'));
 }
-
-//==== INCOME ====
-/*let income = [];
-
-function processIncomeData(incomeData) {
-    income = Object.values(incomeData.income);
-    return income;
-}
-
-function getIncome() {
-    return fetch(MOCK_URL + "/income")
-        .then(data => data.json())
-        .then(data => {
-            income = data;
-            return data;
-        });
-}
-
-function calcIncome(income) {
-    console.log('displayIncome ran');
-    const totalIncome = income.map(income => 
-        income.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-
-    /*const date = moment().subtract(10, 'days').calendar();
-    const incomeTable = income.map(income => {
-        return `
-            <tr>` + 
-                `<td class="item">${income.description}</td>` +
-                `<td class="amount">$${income.amount.toFixed(2)}</td>` +
-                `<td class="purchaseDate">${date}</td>` +
-                `<td class="category">income</td>` +
-            `</tr>`
-    });
-    $(".expense-data").append(incomeTable);
-}
-
-function getAndDisplayIncome() {
-    return getIncome()
-        .then(income => {
-            calcIncome(income);
-        });
-}*/
 
 //===== TRANSACTIONS ======
 
@@ -62,7 +16,7 @@ function processTransactionData(transactionData) {
 // GET /expenses/:date - return list of transactions for selected month
 
 function getTransactions() {
-    return fetch(MOCK_URL + "/transactions")
+    return fetch('/transactions')
         .then(data => data.json())
         .then(data => {
             transactions = data;
@@ -113,7 +67,7 @@ function addTransaction() {
     console.log(newTransaction);
     $.ajax({
         type: 'POST',
-        url: MOCK_URL + '/transactions',
+        url: '/transactions',
         contentType: 'application/JSON',
         data: JSON.stringify(newTransaction),
         success: transaction => {
@@ -128,6 +82,14 @@ function addTransaction() {
     });
 }
 
+function updateTransaction() {
+
+}
+
+function deleteTransaction() {
+    
+}
+
 //===== GOALS ======
 let goals = [];
 
@@ -137,7 +99,7 @@ function processGoalData(goalData) {
 }
 
 function getGoals() {
-    return fetch(MOCK_URL + "/goals")
+    return fetch('/goals')
         .then(data => data.json())
         .then(data => {
             goals = data;
@@ -177,7 +139,7 @@ function addGoal() {
 
     $.ajax({
         type: 'POST',
-        url: MOCK_URL + '/goals',
+        url: '/goals',
         contentType: 'application/JSON',
         data: JSON.stringify({goal: goal}),
         success: newGoal => {
