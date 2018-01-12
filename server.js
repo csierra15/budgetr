@@ -7,11 +7,18 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-mongoose.Promise = global.Promise;
+const { PORT, DATABASE_URL } = require('./config')
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+
+const { router: transactionRouter } = require('./transactionRouter');
+const { router: goalRouter } = require('./goalRouter');
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 const app = express();
 
-const { PORT, DATABASE_URL } = require('./config')
+mongoose.Promise = global.Promise;
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,12 +36,6 @@ app.use(bodyParser.json());
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
-
-const { router: transactionRouter } = require('./transactionRouter');
-const { router: goalRouter } = require('./goalRouter');
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
