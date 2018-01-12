@@ -31,10 +31,10 @@ function displayTransactions() {
         let date = moment(transaction.date).format('L')
         return `
             <tr class="transaction" data-trans_id="${transaction.id}">` +
-                `<td class="description" contenteditable="true">${transaction.description}</td>` + 
-                `<td class="amount" contenteditable="true">$${amount}</td>` +
-                `<td class="purchaseDate" contenteditable="true">${date}</td>` +
-                `<td class="category" contenteditable="true">${transaction.category}</td>` +
+                `<td class="change-text description" contenteditable="true">${transaction.description}</td>` + 
+                `<td class="change-text amount" contenteditable="true">$${amount}</td>` +
+                `<td class="change-text purchaseDate" contenteditable="true">${date}</td>` +
+                `<td class="change-text category">${transaction.category}</td>` +
                 `<td class="remove-tr"><button class="remove-trans-btn">x</button></td>` +
             `</tr>`
     });
@@ -84,14 +84,15 @@ function addTransaction() {
     });
 }
 
-function updateTransaction(trans_id) {
+function updateTransaction(updatedTrans, trans_id) {
     $.ajax({
         method: 'PUT',
         url: '/transactions/${trans_id}',
         contentType: 'application/JSON',
-        data: '',
+        data: JSON.stringify(updatedTrans),
         success: function() {
             displayTransactions();
+            calculateBudget();
         },
         error: err => {
             console.log(err);
@@ -234,7 +235,19 @@ function handleNewTransaction() {
 }
 
 function handleTransactionUpdate() {
-
+    $('table').on('input', '.change-text', e => {
+        let trans_id = $(e.target).closest('.transaction').data('trans_id');
+        let description = $(e.target).closest('.description').val();
+        let amount = $(e.target).closest('.amount-input').val();
+        let date = $(e.target).closest('.date').val();
+        let updatedTrans = {
+            id: trans_id,
+            description: description,
+            amount: amount,
+            date: date
+        }
+        updateTransaction(updatedTrans, trans_id);
+    });
 }
 
 function handleTransactionDelete() {
@@ -288,7 +301,8 @@ $(function() {
     $('.total-budget-section').hide();
     $('.goal-section').hide();
     $('#new-goal-section').hide();
-    $('.transaction-section').hide();
+    //$('.transaction-section').hide();
+    getAndDisplayTransactions();
     $('#new-trans-section').hide();
 
     $('#login-btn').on('click', e => {
