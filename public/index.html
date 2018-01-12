@@ -34,10 +34,10 @@
     <div id="login">
         <form action="#" class="login-form">
             <label for="get-username">Username</label>
-            <input type="text" name="username" id="login-email-input" placeholder="myusername">
+            <input type="text" name="username" id="login-email-input" placeholder="myusername" required>
 
             <label for="password">Password</label>
-            <input type="password" name="password" id="login-password-input" placeholder="mypassword">
+            <input type="password" name="password" id="login-password-input" placeholder="mypassword" required>
 
             <button class="login-submit-btn">Log in</button>
         </form>
@@ -47,14 +47,14 @@
     <div id="register">
         <form class="s-form" action="#">
             <label for="username">Username</label>
-            <input type="text" name="username" id="signup-email-input" placeholder="myusername">
+            <input type="text" name="username" id="signup-email-input" placeholder="myusername" required>
 
             <label for="password">Enter Password</label>
-            <input type="password" name="password" id="signup-password-input" placeholder="mypassword">
+            <input type="password" name="password" id="signup-password-input" placeholder="mypassword" required>
 
             <label for="reenterPassword"></label>
             <label for="confirmPassword">Retype Password</label>
-            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword">
+            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword" required>
 
             <button type="submit">Sign up!</button>
             <p>Already have an account? <a href="#">Log in</a></p>
@@ -74,7 +74,7 @@
     <section id="new-goal-section">
         <form action="#" id-"new-goal-form">
             <label for="goal-input"></label>
-            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
+            <input type="text" name="goal-input" id="goal-input" placeholder="my goal" required>
 
             <button type="submit" id="submit-goal-btn">Submit</button>
             <button type="reset" id="cancel-goal-btn">Cancel</button>
@@ -96,6 +96,7 @@
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Category</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -115,13 +116,13 @@
             <p id="select-cat-message">Please select a category</p>
 
             <label for="description">Description</label>
-            <input type="text" name="description" id="description-input" placeholder="groceries">
+            <input type="text" name="description" id="description-input" placeholder="groceries" required>
     
             <label for="cost">Amount</label>
-            <input type="text" name="amount" id="amount-input" placeholder="$3.25">
+            <input type="text" name="amount" id="amount-input" placeholder="3.25" required>
     
             <label for="date">Date</label>
-            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY">
+            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" required>
 
             <button type="submit" id="submit-new-trans">Submit</button>
             <button type="reset" id="cancel-trans-btn">Cancel</button>

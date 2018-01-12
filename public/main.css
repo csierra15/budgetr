@@ -1,6 +1,8 @@
-table, tr, th, td {
+
+
+/*table, tr, th, td {
     border: 1px solid;
-}
+}*/
 
 .signup-form {
     padding: 10px;
@@ -30,14 +32,28 @@ input[type=text] {
     width: 50%;
 }
 
-.goal-form {
+.edit-goal-form {
     display: none;
 }
 
-.editable .goal-form {
+.editable .edit-goal-form {
     display: block;
 }
 
 .editable .goal-display {
     display: none;
 }
+
+.glyphicons-remove {
+    font-size: 20px;
+}
+
+.remove-tr {
+  color: #700;
+  cursor: pointer;
+}
+
+  
+.remove-tr:hover {
+    color: #f00;
+  }
