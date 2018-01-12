@@ -285,9 +285,11 @@ $(function() {
 
     $('#login').hide();
     $('#register').hide();
-    $('#new-trans-section').hide();
+    $('.total-budget-section').hide();
+    $('.goal-section').hide();
     $('#new-goal-section').hide();
-    $('#select-cat-message').hide();
+    $('.transaction-section').hide();
+    $('#new-trans-section').hide();
 
     $('#login-btn').on('click', e => {
         e.preventDefault();
