@@ -1,9 +1,11 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
@@ -25,11 +27,30 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+
 const { router: transactionRouter } = require('./transactionRouter');
 const { router: goalRouter } = require('./goalRouter');
 
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
 app.use('/transactions', transactionRouter);
 app.use('/goals', goalRouter)
+
+app.get('/api/protected', jwtAuth, (req, res) => {
+    return res.json({
+      data: 'rosebud'
+    });
+  });
+  
+  app.use('*', (req, res) => {
+    return res.status(404).json({ message: 'Not Found' });
+  });
 
 let server;
 
