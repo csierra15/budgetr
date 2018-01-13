@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Budget Tracker</title>
+    <title>Budget Tracker Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
     <header>
-        <h1>Budget Tracker</h1>
-        <button id="logout-btn">Log Out</button>
+        <h1>Budget Tracker Demo</h1>
     </header>
     
     <section id="about-section">
         <p>Keep track of your spending!</p>
-        <button type="submit" id="login-btn">Log In</button>
-        <button type="submit" id="register-btn">Register</button>
 
         <div id="about">
             <div class="col-4">
@@ -30,36 +27,9 @@
             </div>
         </div>    
 
+        <button id="show-demo-btn">see the demo</button>
+
     </section>
-
-    <div id="login">
-        <form action="#" id="login-form">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="login-username-input" placeholder="myusername" required>
-
-            <label for="password">Password</label>
-            <input type="password" name="password" id="login-password-input" placeholder="mypassword" required>
-
-            <button class="login-submit-btn">Log in</button>
-        </form>
-        <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
-    </div>
-
-    <div id="register">
-        <form id="register-form" action="#">
-            <label for="post-username">Username</label>
-            <input type="text" name="post-username" id="signup-email-input" placeholder="myusername" required>
-
-            <label for="password">Enter Password</label>
-            <input type="password" name="password" id="signup-password-input" placeholder="mypassword" required>
-
-            <label for="reenterPassword"></label>
-            <label for="confirmPassword">Retype Password</label>
-            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword" required>
-
-            <button type="submit">Sign up!</button>
-            <p>Already have an account? <a href="#" id="log-in-link">Log in</a></p>
-    </div>
 
     <section class="total-budget-section">
         <h1 class="month"> Budget</h1>
@@ -125,6 +95,8 @@
     
         </form>
     </section>
+
+    <footer id="footer"></footer>
 
     <canvas id="displayData" width="400" height="400"></canvas>
     <canvas id="spendingOverTime" width="400" height="400"></canvas>

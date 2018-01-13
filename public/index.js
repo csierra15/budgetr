@@ -231,6 +231,7 @@ function handleNewTransaction() {
             addTransaction();
             $('#select-cat-message').hide();
             $('#new-trans-section').hide();
+            $('#new-trans-section input[type="text"]').val('');
         }
     });
 }
@@ -295,23 +296,24 @@ function handleDeleteGoal() {
 
 $(function() {
 
-    $('#logout-btn').hide();
-    $('#login').hide();
-    $('#register').hide();
     $('.total-budget-section').hide();
     $('.goal-section').hide();
     $('#new-goal-section').hide();
     $('.transaction-section').hide();
     $('#new-trans-section').hide();
 
-    $('#login-btn').on('click', e => {
-        e.preventDefault();
-        $('#login').show();
-    });
-
-    $('#register-btn').on('click', e => {
-        e.preventDefault();
-        $('#register').show();
+    $('#show-demo-btn').on('click', e => {
+        $('.total-budget-section').show();
+        $('.goal-section').show();
+        $('.transaction-section').show();
+        $('#show-demo-btn').hide();
+        displayMonth()
+        Promise.all([
+            getAndDisplayTransactions()
+        ]).then(() => {
+            calculateBudget();
+        });
+        getAndDisplayGoals();
     });
 
     $('#new-trans-btn').on('click', e => {
@@ -330,88 +332,6 @@ $(function() {
 
     $('#cancel-goal-btn').on('click', e => {
         $('#new-goal-section').hide();
-    });
-
-    $('#login-form').submit(function(e) {
-		e.preventDefault();
-		let username = $('#login-username-input').val();
-		let password = $('#login-password-input').val();
-		let userInfo = {username, password};
-		let settings = {
-			url:'/auth/login',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(userInfo),
-			success: function(data) {
-				console.log('you are logged in!');
-				localStorage.setItem("authToken", data.authToken);
-				localStorage.setItem("currentUser", username);
-				user = username;
-				$('#about-section').hide();
-				$("#login").hide();
-				$('#register').hide();
-				$("#logout-btn").show();
-				console.log(data);
-				displayMonth()
-                Promise.all([
-                    getAndDisplayTransactions()
-                ]).then(() => {
-                    calculateBudget();
-                });
-                getAndDisplayGoals();
-			},
-			error: function(err) {
-                console.log(err);
-                alert('Could not log in :(');
-			}
-		};
-		$.ajax(settings);
-	}) 
-
-	$("#register-form").submit(function(e) {
-		e.preventDefault();
-		let username = $('#signup-email-input').val();
-		let password = $('#signup-password-input').val();
-		let retypePass = $('#signup-confirmPassword-input').val();
-		let user = {username, password};
-		let settings = {
-			url:"/users",
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(user),
-			success: function(data) {
-				console.log('successfully registered!');
-				$("#register-form input[type='text']").val('');
-				$('#register').hide();
-				$('#about-section').hide();
-				$("#login").show();
-			},
-			error: function(err) {
-				console.log(err);
-				if (password.length < 8) {
-					alert("Password must be at least 8 characters");
-				}
-				if (password.length !== retypePass.length) {
-					alert("Passwords must match");
-				}
-				if (password !== retypePass) {
-					alert("Passwords must match");
-				}
-			}
-		};
-		$.ajax(settings);
-    });
-    
-    $('#log-in-link').on('click', e => {
-        e.preventDefault();
-        $('#register').hide();
-        $('#login').show();
-    });
-
-    $('#register-link').on('click', e => {
-        e.preventDefault();
-        $('#login').hide();
-        $('#register').show();
     });
 
     $('.goals').on('click', '.edit-goal-btn', e => {
