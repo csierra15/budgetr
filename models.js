@@ -5,64 +5,35 @@ mongoose.Promise = global.Promise;
 
 const uuid = require('uuid');
 
-const incomeSchema = mongoose.Schema ({
-    listName: {type: String, required: true},
-    content: [{
-        name: {type: String, required: true},
-        department: {type: String, required: true}
-    }],
-    publishedAt: {type: Date, default: Date.now}
+const transactionSchema = mongoose.Schema ({
+    description: {type: String, required: true},
+    amount: {type: String, required: true},
+    date: {type: Date, default: Date.now},
+    category: {type: String, required: true},
 });
 
-incomeSchema.methods.serialize = function() {
+transactionSchema.methods.serialize = function() {
     return {
         id: this._id,
-        listName: this.listName,
-        content: this.content,
-        publishedAt: this.publishedAt
-    };
-};
-
-const expenseSchema = mongoose.Schema ({
-    name: {type: String, required: true},
-    state: {type: String, required: true},
-    city: {type: String, required: true},
-    products: [{
-        aisle: {type: String, required: true}
-    }]
-});
-
-expenseSchema.methods.serialize = function() {
-    return {
-        id: this._id,
-        name: this.name,
-        state: this.state,
-        city: this.city,
-        products: this.products
+        description: this.description,
+        amount: this.amount,
+        date: this.date,
+        category: this.category
     };
 };
 
 const goalSchema = mongoose.Schema ({
-    name: {type: String, required: true},
-    state: {type: String, required: true},
-    city: {type: String, required: true},
-    products: [{
-        aisle: {type: String, required: true}
-    }]
+    goal: {type: String, required: true},
 });
 
 goalSchema.methods.serialize = function() {
     return {
         id: this._id,
-        name: this.name,
-        state: this.state,
-        city: this.city,
-        products: this.products
+        goal: this.goal
     };
 };
 
-const Income = mongoose.model('Income', incomeSchema);
-const Expense = mongoose.model('Expense', expenseSchema);
-const Goal = mongoose.model('Goal', GoalSchema);
+const Transactions = mongoose.model('Transaction', transactionSchema);
+const Goals = mongoose.model('Goal', goalSchema);
 
-module.exports = { Income, Expense, Goal };
+module.exports = { Transactions, Goals };

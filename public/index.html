@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Budget Tracker</title>
+    <title>Budget Tracker Demo</title>
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
     <header>
-        <h1>Budget Tracker</h1>
+        <h1>Budget Tracker Demo</h1>
     </header>
     
     <section id="about-section">
         <p>Keep track of your spending!</p>
-        <button type="submit" id="login-btn">Log In</button>
-        <button type="submit" id="register-btn">Register</button>
 
         <div id="about">
             <div class="col-4">
@@ -29,36 +27,9 @@
             </div>
         </div>    
 
+        <button id="show-demo-btn">see the demo</button>
+
     </section>
-
-    <div id="login">
-        <form action="#" class="login-form">
-            <label for="get-username">Username</label>
-            <input type="text" name="username" id="login-email-input" placeholder="myusername">
-
-            <label for="password">Password</label>
-            <input type="password" name="password" id="login-password-input" placeholder="mypassword">
-
-            <button class="login-submit-btn">Log in</button>
-        </form>
-        <p>Don't have an account yet? <a href="#" id="register-link">Sign up!</a></p>
-    </div>
-
-    <div id="register">
-        <form class="s-form" action="#">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="signup-email-input" placeholder="myusername">
-
-            <label for="password">Enter Password</label>
-            <input type="password" name="password" id="signup-password-input" placeholder="mypassword">
-
-            <label for="reenterPassword"></label>
-            <label for="confirmPassword">Retype Password</label>
-            <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword">
-
-            <button type="submit">Sign up!</button>
-            <p>Already have an account? <a href="#">Log in</a></p>
-    </div>
 
     <section class="total-budget-section">
         <h1 class="month"> Budget</h1>
@@ -81,11 +52,6 @@
         </form>
     </section>
 
-    <!-- <section class="income-section">
-        <h2 class="income-header">Income</h2>
-        <div class="income-data"></div>
-    </section>-->
-
     <section class="transaction-section">
         <h2 class="transaction-header">Transactions</h2>
         <button id="new-trans-btn" type="submit">+ Add Transaction</button>
@@ -96,6 +62,7 @@
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Category</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -115,19 +82,21 @@
             <p id="select-cat-message">Please select a category</p>
 
             <label for="description">Description</label>
-            <input type="text" name="description" id="description-input" placeholder="groceries" value="eggs">
+            <input type="text" name="description" id="description-input" placeholder="groceries" required>
     
             <label for="cost">Amount</label>
-            <input type="text" name="amount" id="amount-input" placeholder="$3.25" value="3.25">
+            <input type="text" name="amount" id="amount-input" placeholder="3.25" required>
     
             <label for="date">Date</label>
-            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" value="01/08/2018">
+            <input type="text" name="date" id="date-input" placeholder="MM/DD/YYYY" required>
 
             <button type="submit" id="submit-new-trans">Submit</button>
             <button type="reset" id="cancel-trans-btn">Cancel</button>
     
         </form>
     </section>
+
+    <footer id="footer"></footer>
 
     <canvas id="displayData" width="400" height="400"></canvas>
     <canvas id="spendingOverTime" width="400" height="400"></canvas>
