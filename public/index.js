@@ -375,7 +375,7 @@ $(function() {
 		let retypePass = $('#signup-confirmPassword-input').val();
 		let user = {username, password};
 		let settings = {
-			url:"/users/",
+			url:"/users",
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(user),
@@ -388,8 +388,8 @@ $(function() {
 			},
 			error: function(err) {
 				console.log(err);
-				if (password.length < 10) {
-					alert("Password must be at least 10 characters");
+				if (password.length < 8) {
+					alert("Password must be at least 8 characters");
 				}
 				if (password.length !== retypePass.length) {
 					alert("Passwords must match");
