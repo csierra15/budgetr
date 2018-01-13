@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1>Budget Tracker</h1>
-        <button class="logout-btn">Log Out</button>
+        <button id="logout-btn">Log Out</button>
     </header>
     
     <section id="about-section">
@@ -58,7 +58,7 @@
             <input type="password" name="confirmPassword" id="signup-confirmPassword-input" placeholder="mypassword" required>
 
             <button type="submit">Sign up!</button>
-            <p>Already have an account? <a href="#">Log in</a></p>
+            <p>Already have an account? <a href="#" id="log-in-link">Log in</a></p>
     </div>
 
     <section class="total-budget-section">
@@ -75,17 +75,12 @@
     <section id="new-goal-section">
         <form action="#" id-"new-goal-form">
             <label for="goal-input"></label>
-            <input type="text" name="goal-input" id="goal-input" placeholder="my goal" required>
+            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
 
             <button type="submit" id="submit-goal-btn">Submit</button>
             <button type="reset" id="cancel-goal-btn">Cancel</button>
         </form>
     </section>
-
-    <!-- <section class="income-section">
-        <h2 class="income-header">Income</h2>
-        <div class="income-data"></div>
-    </section>-->
 
     <section class="transaction-section">
         <h2 class="transaction-header">Transactions</h2>

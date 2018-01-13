@@ -295,7 +295,7 @@ function handleDeleteGoal() {
 
 $(function() {
 
-    $("#logout-btn").hide();
+    $('#logout-btn').hide();
     $('#login').hide();
     $('#register').hide();
     $('.total-budget-section').hide();
@@ -389,18 +389,30 @@ $(function() {
 			error: function(err) {
 				console.log(err);
 				if (password.length < 10) {
-					$("#errorTenChar").html("Password must be at least 10 characters")
+					alert("Password must be at least 10 characters");
 				}
 				if (password.length !== retypePass.length) {
-					$("#errorMatchPass").html("Passwords must match")
+					alert("Passwords must match");
 				}
 				if (password !== retypePass) {
-					$("#errorMatchPass").html("Passwords must match")
+					alert("Passwords must match");
 				}
 			}
 		};
 		$.ajax(settings);
-	})
+    });
+    
+    $('#log-in-link').on('click', e => {
+        e.preventDefault();
+        $('#register').hide();
+        $('#login').show();
+    });
+
+    $('#register-link').on('click', e => {
+        e.preventDefault();
+        $('#login').hide();
+        $('#register').show();
+    });
 
     $('.goals').on('click', '.edit-goal-btn', e => {
         e.preventDefault();

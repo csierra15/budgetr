@@ -37,8 +37,8 @@ app.use(bodyParser.json());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
+app.use('/users/', usersRouter);
+app.use('/auth/', authRouter);
 
 app.use('/transactions', transactionRouter);
 app.use('/goals', goalRouter)
