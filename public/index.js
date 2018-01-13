@@ -1,4 +1,5 @@
 'use strict';
+let user = localStorage.getItem('currentUser');
 
 function displayMonth() {
     $(".month").prepend(moment().format('MMMM YYYY'));
@@ -294,15 +295,13 @@ function handleDeleteGoal() {
 
 $(function() {
 
-    let loggedIn;
-
+    $("#logout-btn").hide();
     $('#login').hide();
     $('#register').hide();
     $('.total-budget-section').hide();
     $('.goal-section').hide();
     $('#new-goal-section').hide();
-    //$('.transaction-section').hide();
-    getAndDisplayTransactions();
+    $('.transaction-section').hide();
     $('#new-trans-section').hide();
 
     $('#login-btn').on('click', e => {
@@ -333,15 +332,75 @@ $(function() {
         $('#new-goal-section').hide();
     });
 
-    if(loggedIn === true) {
-        displayMonth()
-        Promise.all([
-            getAndDisplayTransactions()
-        ]).then(() => {
-        calculateBudget();
-        });
-        getAndDisplayGoals();
-    }
+    $('#login-form').submit(function(e) {
+		e.preventDefault();
+		let username = $('#login-username-input').val();
+		let password = $('#login-password-input').val();
+		let userInfo = {username, password};
+		let settings = {
+			url:'/auth/login',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(userInfo),
+			success: function(data) {
+				console.log('you are logged in!');
+				localStorage.setItem("authToken", data.authToken);
+				localStorage.setItem("currentUser", username);
+				user = username;
+				$('#about-section').hide();
+				$("#login").hide();
+				$('#register').hide();
+				$("#logout-btn").show();
+				console.log(data);
+				displayMonth()
+                Promise.all([
+                    getAndDisplayTransactions()
+                ]).then(() => {
+                    calculateBudget();
+                });
+                getAndDisplayGoals();
+			},
+			error: function(err) {
+                console.log(err);
+                alert('Could not log in :(');
+			}
+		};
+		$.ajax(settings);
+	}) 
+
+	$("#register-form").submit(function(e) {
+		e.preventDefault();
+		let username = $('#signup-email-input').val();
+		let password = $('#signup-password-input').val();
+		let retypePass = $('#signup-confirmPassword-input').val();
+		let user = {username, password};
+		let settings = {
+			url:"/users/",
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(user),
+			success: function(data) {
+				console.log('successfully registered!');
+				$("#register-form input[type='text']").val('');
+				$('#register').hide();
+				$('#about-section').hide();
+				$("#login").show();
+			},
+			error: function(err) {
+				console.log(err);
+				if (password.length < 10) {
+					$("#errorTenChar").html("Password must be at least 10 characters")
+				}
+				if (password.length !== retypePass.length) {
+					$("#errorMatchPass").html("Passwords must match")
+				}
+				if (password !== retypePass) {
+					$("#errorMatchPass").html("Passwords must match")
+				}
+			}
+		};
+		$.ajax(settings);
+	})
 
     $('.goals').on('click', '.edit-goal-btn', e => {
         e.preventDefault();

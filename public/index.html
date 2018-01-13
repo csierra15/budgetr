@@ -10,6 +10,7 @@
 <body>
     <header>
         <h1>Budget Tracker</h1>
+        <button class="logout-btn">Log Out</button>
     </header>
     
     <section id="about-section">
@@ -32,9 +33,9 @@
     </section>
 
     <div id="login">
-        <form action="#" class="login-form">
-            <label for="get-username">Username</label>
-            <input type="text" name="username" id="login-email-input" placeholder="myusername" required>
+        <form action="#" id="login-form">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="login-username-input" placeholder="myusername" required>
 
             <label for="password">Password</label>
             <input type="password" name="password" id="login-password-input" placeholder="mypassword" required>
@@ -45,9 +46,9 @@
     </div>
 
     <div id="register">
-        <form class="s-form" action="#">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="signup-email-input" placeholder="myusername" required>
+        <form id="register-form" action="#">
+            <label for="post-username">Username</label>
+            <input type="text" name="post-username" id="signup-email-input" placeholder="myusername" required>
 
             <label for="password">Enter Password</label>
             <input type="password" name="password" id="signup-password-input" placeholder="mypassword" required>
