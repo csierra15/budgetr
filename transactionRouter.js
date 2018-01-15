@@ -57,22 +57,20 @@ Transactions
 });
 
 router.put('/:id', (req, res) => {
-    if (!(req.params.id && req.body.updatedTrans.id && req.params.id === req.body.updatedTrans.id)) {
-        console.log(`${req.body.updatedTrans.id}`);
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         res.status(400).json({
-          error: `Request path id ${req.params.id} and request body id ${req} values must match`
+          error: 'Request path id and request body id values must match'
         });
       }
     
       const updated = {};
       const updateableFields = ['description', 'amount', 'date', 'category'];
       updateableFields.forEach(field => {
-        if (field in req.body.updatedTrans) {
-          updated[field] = req.body.updatedTrans[field];
+        if (field in req.body) {
+          updated[field] = req.body[field];
         }
       });
-      console.log(req.params.id, updated);
-
+    
       Transactions
         .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
         .then(updatedTransaction => res.status(204).end())
