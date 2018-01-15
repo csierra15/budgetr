@@ -89,8 +89,7 @@ function updateTransaction(id, updatedTrans) {
         dataType: 'JSON',
         data: JSON.stringify({updatedTrans}),
         success: function(res) {
-            console.log(res);
-            displayTransactions();
+            getAndDisplayTransactions();
             calculateBudget();
         },
         error: err => {
@@ -108,6 +107,47 @@ function deleteTransaction(trans_id) {
             console.log('err')
         }
     })
+}
+
+function handleNewTransaction() {
+    $('.trans-form').submit( e => {
+        if($('#select-category').val() === '0'){
+            $('#select-cat-message').show();
+            e.preventDefault();
+        }else{
+            e.preventDefault();
+            addTransaction();
+            $('#select-cat-message').hide();
+            $('#new-trans-section').hide();
+            $('#new-trans-section input[type="text"]').val('');
+            $('#select-category').val('0');
+        }
+    });
+}
+
+function handleTransactionUpdate() {
+    $('table').on('focusout', '.change-text', e => {
+        let id = $('.transaction').data('trans_id');
+        let description = $(e.target).closest('tr').find('.description').text();
+        let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
+        let date = $(e.target).closest('tr').find('.date').text();
+    let updatedTrans = {
+        id: id,
+        description: description,
+        amount: amount,
+        date: date
+    }
+    updateTransaction(id, updatedTrans);
+    });
+}
+
+function handleTransactionDelete() {
+    $('table').on('click', '.remove-trans-btn', e => {
+        e.preventDefault();
+        let trans_id = $(e.target).closest('.transaction').data('trans_id');
+        $(e.target).closest('tr').remove();
+        deleteTransaction(trans_id);
+    });
 }
 
 //===== GOALS ======
@@ -202,63 +242,6 @@ function deleteGoal(id){
     })
 }
 
-// ==== CALCULATE BUDGET (income - expenses) ====
-
-function calculateBudget() {
-    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    let total = totalIncome - totalExpenses;
-    let totalBudget = total.toFixed(2);
-
-    $(".budget-data").html("$" + totalBudget);
-}
-
-function handleNewTransaction() {
-    $('.trans-form').submit( e => {
-        if($('#select-category').val() === '0'){
-            $('#select-cat-message').show();
-            e.preventDefault();
-        }else{
-            e.preventDefault();
-            addTransaction();
-            $('#select-cat-message').hide();
-            $('#new-trans-section').hide();
-            $('#new-trans-section input[type="text"]').val('');
-            $('#select-category').val('0');
-        }
-    });
-}
-
-function handleTransactionUpdate() {
-    $('table').on('focusout', '.change-text', e => {
-        let id = $('.transaction').data('trans_id');
-        let description = $(e.target).closest('tr').find('.description').text();
-        let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
-        let date = $(e.target).closest('tr').find('.date').text();
-    let updatedTrans = {
-        id: id,
-        description: description,
-        amount: amount,
-        date: date
-    }
-    console.log(updatedTrans);
-    updateTransaction(id, updatedTrans);
-    });
-}
-
-function handleTransactionDelete() {
-    $('table').on('click', '.remove-trans-btn', e => {
-        e.preventDefault();
-        let trans_id = $(e.target).closest('.transaction').data('trans_id');
-        $(e.target).closest('tr').remove();
-        deleteTransaction(trans_id);
-    });
-}
-
 function handleNewGoal() {
     $('#submit-goal-btn').on('click', e => {
         e.preventDefault();
@@ -286,6 +269,19 @@ function handleDeleteGoal() {
         deleteGoal(id);
         $(e.target).closest('.goals').detach();
     });
+}
+
+function calculateBudget() {
+    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
+    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
+    let total = totalIncome - totalExpenses;
+    let totalBudget = total.toFixed(2);
+
+    $(".budget-data").html("$" + totalBudget);
 }
 
 $(function() {

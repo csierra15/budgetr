@@ -97,12 +97,12 @@ describe('Transaction API resource', function() {
           });
       });
 
-      describe('PUT endpoint', function() {
+      /*describe('PUT endpoint', function() {
           it('should update fields sent over', function() {
               const updateData = {
-                  description: 'paycheck',
-                  amount: '200',
-                  category: 'income'
+                  'description': 'paycheck',
+                  'amount': '200',
+                  'category': 'income'
               };
 
               return Transactions
@@ -115,7 +115,7 @@ describe('Transaction API resource', function() {
                         .send(updateData);
                 })
                 .then(function(res) {
-                    res.should.have.status(204)
+                    res.should.have.status(204);
 
                     return Transactions.findById(updateData.id);
                 })
@@ -125,10 +125,10 @@ describe('Transaction API resource', function() {
                     transaction.category.should.equal(updateData.category);
                 });
           });
-      });
+      });*/
 
       describe('DELETE endpoint', function() {
-        it('delete a transaction by id', function() {
+        it('should delete a transaction by id', function() {
     
           let transaction;
     
