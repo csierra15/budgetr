@@ -54,24 +54,20 @@ Goals
 });
 
 router.put('/:id', (req, res) => {
-    if (!(req.params.id && req.body.goal.id && req.params.id === req.body.goal.id)) {
-        console.log(`${req}`);
-        console.log(`${req.body.goal}`);
-        console.log(`${req.body.goal.id}`);
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         res.status(400).json({
-          error: `Request path id ${req.params.id} and request body id ${req.body.goal.id} values must match`
+          error: 'Request path id and request body id values must match'
         });
       }
     
       const updated = {};
       const updateableFields = ['goal'];
       updateableFields.forEach(field => {
-        if (field in req.body.goal) {
-          updated[field] = req.body.goal[field];
+        if (field in req.body) {
+          updated[field] = req.body[field];
         }
       });
-      console.log(req.params.id, updated);
-      
+    
       Goals
         .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
         .then(updatedGoal => res.status(204).end())
