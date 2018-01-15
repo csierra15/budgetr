@@ -5,6 +5,21 @@ function displayMonth() {
     $(".month").prepend(moment().format('MMMM YYYY'));
 }
 
+function calculateBudget() {
+    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
+    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    });
+    let total = totalIncome - totalExpenses;
+    let totalBudget = total.toFixed(2);
+
+    $(".budget-data").html("$" + totalBudget);
+
+    console.log('calculating budget');
+}
+
 //===== TRANSACTIONS ======
 
 let transactions = [];
@@ -81,7 +96,6 @@ function addTransaction() {
 }
 
 function updateTransaction(id, updatedTrans) {
-    console.log(updatedTrans);
     $.ajax({
         method: 'PUT',
         url: `/transactions/${id}`,
@@ -90,7 +104,6 @@ function updateTransaction(id, updatedTrans) {
         data: JSON.stringify({updatedTrans}),
         success: function(res) {
             getAndDisplayTransactions();
-            calculateBudget();
         },
         error: err => {
             console.log(err);
@@ -138,6 +151,7 @@ function handleTransactionUpdate() {
         date: date
     }
     updateTransaction(id, updatedTrans);
+    return calculateBudget();
     });
 }
 
@@ -269,19 +283,6 @@ function handleDeleteGoal() {
         deleteGoal(id);
         $(e.target).closest('.goals').detach();
     });
-}
-
-function calculateBudget() {
-    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    let total = totalIncome - totalExpenses;
-    let totalBudget = total.toFixed(2);
-
-    $(".budget-data").html("$" + totalBudget);
 }
 
 $(function() {
