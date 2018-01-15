@@ -87,10 +87,11 @@ function updateTransaction(id, updatedTrans) {
         method: 'PUT',
         url: `/transactions/${id}`,
         contentType: 'application/JSON',
+        dataType: 'JSON',
         data: JSON.stringify({updatedTrans}),
         success: function() {
-            console.log(`item ${id} was successfully updated`, updatedTrans)
-            getAndDisplayTransactions();
+            console.log(`item ${id} was successfully updated`, updatedTrans);
+            //displayTransactions();
             calculateBudget();
         },
         error: err => {
@@ -175,6 +176,8 @@ function updateGoal(id, goal) {
     $.ajax({
         method: 'PUT',
         url: `/goals/${id}`,
+        contentType: 'application/JSON',
+        dataType: 'JSON',
         data: JSON.stringify({id: id, goal: goal}),
         success: function() {
             displayGoals();
@@ -192,7 +195,7 @@ function deleteGoal(id){
         method: 'DELETE',
         url: `/goals/${id}`,
         success: function() {
-            displayGoals();
+            console.log('Way to go! You completed a goal!');
         },
         error: err => {
             console.log(err);
@@ -234,7 +237,7 @@ function handleTransactionUpdate() {
     $('table').on('focusout', '.change-text', e => {
         let id = $('.transaction').data('trans_id');
         let description = $(e.target).closest('tr').find('.description').text();;
-        let amount = $(e.target).closest('tr').find('amount').text();;
+        let amount = $(e.target).closest('tr').find('amount').text().replace("$", "");
         let date = $(e.target).closest('tr').find('.date').text();
     let updatedTrans = {
         id: id,
@@ -242,7 +245,8 @@ function handleTransactionUpdate() {
         amount: amount,
         date: date
     }
-        updateTransaction(id, updatedTrans);
+
+    updateTransaction(id, updatedTrans);
     });
 }
 
@@ -260,24 +264,18 @@ function handleNewGoal() {
         e.preventDefault();
         addGoal();
         $('#new-goal-section').hide();
+        $('#new-goal-section input[type="text"]').val('');
     })
 }
 
 function handleUpdateGoal() {
     $('.goals').on('click', '.update-goal-btn', e => {
-        //1. save the goal locally
         let id = $(e.target).closest('.goals').data('goal_id');
         let goal = $('#goal_' + id).val();
         let edited_goal = goals.find(goal => goal.id == id);
         edited_goal.goal = goal;
-        /*let newGoal = {
-            id: id,
-            goal: goal
-        }*/
         updateGoal(id, goal);
-        console.log(id, goal);
         $('.editable').removeClass('editable');
-        $('#new-goal-section input[type="text"]').val('');
     });
 }
  
