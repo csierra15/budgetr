@@ -33,7 +33,7 @@ function displayTransactions() {
             <tr class="transaction" data-trans_id="${transaction.id}">` +
                 `<td class="change-text description" contenteditable="true">${transaction.description}</td>` + 
                 `<td class="change-text amount" contenteditable="true">$${amount}</td>` +
-                `<td class="change-text purchaseDate" contenteditable="true">${date}</td>` +
+                `<td class="change-text date" contenteditable="true">${date}</td>` +
                 `<td class="change-text category">${transaction.category}</td>` +
                 `<td class="remove-tr"><button class="remove-trans-btn">x</button></td>` +
             `</tr>`
@@ -50,10 +50,9 @@ function getAndDisplayTransactions() {
 
 function addTransaction() {
     let description = $('#description-input').val();
-    let amount = $('#amount-input').val();
+    let amount = $('#amount-input').val().replace("$", "");
     let date = $('#date-input').val();
     let category;
-
     let categoryInput = $('#select-category').val();
     if(categoryInput === '+'){
         category = 'income';
@@ -89,9 +88,9 @@ function updateTransaction(id, updatedTrans) {
         contentType: 'application/JSON',
         dataType: 'JSON',
         data: JSON.stringify({updatedTrans}),
-        success: function() {
-            console.log(`item ${id} was successfully updated`, updatedTrans);
-            //displayTransactions();
+        success: function(res) {
+            console.log(res);
+            displayTransactions();
             calculateBudget();
         },
         error: err => {
@@ -229,6 +228,7 @@ function handleNewTransaction() {
             $('#select-cat-message').hide();
             $('#new-trans-section').hide();
             $('#new-trans-section input[type="text"]').val('');
+            $('#select-category').val('0');
         }
     });
 }
@@ -236,8 +236,8 @@ function handleNewTransaction() {
 function handleTransactionUpdate() {
     $('table').on('focusout', '.change-text', e => {
         let id = $('.transaction').data('trans_id');
-        let description = $(e.target).closest('tr').find('.description').text();;
-        let amount = $(e.target).closest('tr').find('amount').text().replace("$", "");
+        let description = $(e.target).closest('tr').find('.description').text();
+        let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
         let date = $(e.target).closest('tr').find('.date').text();
     let updatedTrans = {
         id: id,
@@ -245,7 +245,7 @@ function handleTransactionUpdate() {
         amount: amount,
         date: date
     }
-
+    console.log(updatedTrans);
     updateTransaction(id, updatedTrans);
     });
 }

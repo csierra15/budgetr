@@ -64,17 +64,20 @@ router.put('/:id', (req, res) => {
         });
       }
     
-      const updated = {};
+      /*const updated = {};
       const updateableFields = ['description', 'amount', 'date', 'category'];
       updateableFields.forEach(field => {
+          console.log(field);
+          console.log(req.body);
         if (field in req.body != 0) {
+            console.log(req.body);
           updated[field] = req.body.updatedTrans[field];
         }
-      });
-    
+      });*/
+
       Transactions
-        .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
-        .then(updatedTransaction => res.status(204).end())
+        .findByIdAndUpdate(req.params.id, { $set: req.body.updatedTrans }, { new: true })
+        .then(updatedTransaction => res.json(updatedTransaction))
         .catch(err => res.status(500).json({ message: 'Could not update' }));
     
 });
