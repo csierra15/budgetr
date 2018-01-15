@@ -41,12 +41,9 @@ input{
     padding: 10px;
 }
 
-.editable {
-    width: 33%;
-}
-
 .editable input{
-    width: 50%;
+    width: 100%;
+    text-align: center;
 }
 
 .edit-goal-form {
@@ -54,6 +51,7 @@ input{
 }
 
 .editable .edit-goal-form {
+    text-align: center;
     display: block;
 }
 

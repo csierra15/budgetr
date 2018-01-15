@@ -81,14 +81,15 @@ function addTransaction() {
     });
 }
 
-function updateTransaction(updatedTrans, trans_id) {
+function updateTransaction(id, updatedTrans) {
+    console.log(updatedTrans);
     $.ajax({
         method: 'PUT',
-        url: `/transactions/${trans_id}`,
+        url: `/transactions/${id}`,
         contentType: 'application/JSON',
-        data: JSON.stringify(updatedTrans),
+        data: JSON.stringify({updatedTrans}),
         success: function() {
-            console.log(`item ${trans_id} was successfully updated`, updatedTrans)
+            console.log(`item ${id} was successfully updated`, updatedTrans)
             getAndDisplayTransactions();
             calculateBudget();
         },
@@ -102,7 +103,6 @@ function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
-        data: `${trans_id}`,
         success: console.log(`Transaction ${trans_id} successfully deleted`),
         error: err => {
             console.log('err')
@@ -171,11 +171,11 @@ function addGoal() {
     });
 }
 
-function updateGoal(new_goal, goal_id) {
-    console.log('Updating goal');
+function updateGoal(id, goal) {
     $.ajax({
         method: 'PUT',
-        url: `/goals/${goal_id}`,
+        url: `/goals/${id}`,
+        data: JSON.stringify({id: id, goal: goal}),
         success: function() {
             displayGoals();
         },
@@ -186,11 +186,11 @@ function updateGoal(new_goal, goal_id) {
     })
 }
 
-function deleteGoal(goal_id){
-    console.log(`deleting goal ${goal_id}`);
+function deleteGoal(id){
+    console.log(`deleting goal ${id}`);
     $.ajax({
         method: 'DELETE',
-        url: `/goals/${goal_id}`,
+        url: `/goals/${id}`,
         success: function() {
             displayGoals();
         },
@@ -232,23 +232,17 @@ function handleNewTransaction() {
 
 function handleTransactionUpdate() {
     $('table').on('focusout', '.change-text', e => {
-        let trans_id = $(e.target).closest('.transaction').data('trans_id');
-        //let description = $(e.target).closest('.description').val();
-        //let amount = $(e.target).closest('.amount-input').val();
-        //let date = $(e.target).closest('.date').val();
-        
-        let new_trans = $('#trans_' + goal_id).val();
-        let edited_goal = transactions.find(transaction => transaction.id == trans_id);
-        edited_trans.transaction = new_trans;
-
-        let updatedTrans = {
-            id: trans_id,
-            description: description,
-            amount: amount,
-            date: date
-        }
-        
-        updateTransaction(updatedTrans, trans_id);
+        let id = $('.transaction').data('trans_id');
+        let description = $(e.target).closest('tr').find('.description').text();;
+        let amount = $(e.target).closest('tr').find('amount').text();;
+        let date = $(e.target).closest('tr').find('.date').text();
+    let updatedTrans = {
+        id: id,
+        description: description,
+        amount: amount,
+        date: date
+    }
+        updateTransaction(id, updatedTrans);
     });
 }
 
@@ -272,11 +266,16 @@ function handleNewGoal() {
 function handleUpdateGoal() {
     $('.goals').on('click', '.update-goal-btn', e => {
         //1. save the goal locally
-        let goal_id = $(e.target).closest('.goals').data('goal_id');
-        let new_goal = $('#goal_' + goal_id).val();
-        let edited_goal = goals.find(goal => goal.id == goal_id);
-        edited_goal.goal = new_goal;
-        addGoal(new_goal, goal_id);
+        let id = $(e.target).closest('.goals').data('goal_id');
+        let goal = $('#goal_' + id).val();
+        let edited_goal = goals.find(goal => goal.id == id);
+        edited_goal.goal = goal;
+        /*let newGoal = {
+            id: id,
+            goal: goal
+        }*/
+        updateGoal(id, goal);
+        console.log(id, goal);
         $('.editable').removeClass('editable');
         $('#new-goal-section input[type="text"]').val('');
     });
@@ -285,8 +284,8 @@ function handleUpdateGoal() {
 function handleDeleteGoal() {
     $('.goals').on('click', '.complete-goal', e => {
         e.preventDefault();
-        let goal_id = $(e.target).closest('.goals').data('goal_id');
-        deleteGoal(goal_id);
+        let id = $(e.target).closest('.goals').data('goal_id');
+        deleteGoal(id);
         $(e.target).closest('.goals').detach();
     });
 }

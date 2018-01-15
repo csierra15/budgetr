@@ -12,6 +12,10 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
+app.use(express.static('public'));
+app.use(morgan('common'));
+app.use(bodyParser.json({extended: true}));
+
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -21,10 +25,6 @@ app.use(function (req, res, next) {
     }
     next();
 });
-
-app.use(express.static('public'));
-app.use(morgan('common'));
-app.use(bodyParser.json());
 
 app.use('/transactions', transactionRouter);
 app.use('/goals', goalRouter);
