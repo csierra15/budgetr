@@ -1,27 +1,44 @@
-
-
-/*table, tr, th, td {
-    border: 1px solid;
-}*/
-
-.signup-form {
-    padding: 10px;
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    background-color: #F5F5F5;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
 }
 
-input {
-    display: block;
-    padding: 5px;
+button {
+    background-color: #093916;
+    color: 	#FFE0C2;
+	height: 3rem;
+	width: 8rem;
+	margin-bottom: 1rem;
+	font-family: 'Montserrat';
+	text-align: center;
+	border-radius: 5px;
+}
+
+input{
+	height: 2.5rem;
+	border-radius: 5px;
+	padding-left: 1rem;
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	font-family: 'Montserrat';
+}
+
+#main-header{
+    position: fixed;
+    font-size: 1.8em;
+    top: 0.5em;
+    left: 0.5em;
 }
 
 /*NEW TRANSACTION*/
 
 .trans-form {
     padding: 10px;
-}
-
-input[type=text] {
-    display: block;
-    padding: 5px;
 }
 
 .editable {
@@ -44,16 +61,6 @@ input[type=text] {
     display: none;
 }
 
-.glyphicons-remove {
-    font-size: 20px;
+.expense-data {
+    margin: 0 auto;
 }
-
-.remove-tr {
-  color: #700;
-  cursor: pointer;
-}
-
-  
-.remove-tr:hover {
-    color: #f00;
-  }

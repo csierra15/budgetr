@@ -26,7 +26,6 @@ function getTransactions() {
 }
 
 function displayTransactions() {
-    console.log('displayTransactions ran');
     const newHtml = transactions.map(transaction => {
         let amount = parseFloat(transaction.amount).toFixed(2);
         let date = moment(transaction.date).format('L')
@@ -39,7 +38,6 @@ function displayTransactions() {
                 `<td class="remove-tr"><button class="remove-trans-btn">x</button></td>` +
             `</tr>`
     });
-
     $(".expense-data tbody").html(newHtml);
 }
 
@@ -67,16 +65,14 @@ function addTransaction() {
         amount: amount,
         date: date,
         category: category};
-    console.log(newTransaction);
     $.ajax({
         method: 'POST',
         url: '/transactions',
         contentType: 'application/JSON',
         data: JSON.stringify(newTransaction),
         success: transaction => {
-            console.log(transaction);
             transactions.push(transaction);
-            displayTransactions();
+            getAndDisplayTransactions();
             calculateBudget();
         },
         error: (err) => {
@@ -88,11 +84,12 @@ function addTransaction() {
 function updateTransaction(updatedTrans, trans_id) {
     $.ajax({
         method: 'PUT',
-        url: '/transactions/${trans_id}',
+        url: `/transactions/${trans_id}`,
         contentType: 'application/JSON',
         data: JSON.stringify(updatedTrans),
         success: function() {
-            displayTransactions();
+            console.log(`item ${trans_id} was successfully updated`, updatedTrans)
+            getAndDisplayTransactions();
             calculateBudget();
         },
         error: err => {
@@ -104,9 +101,9 @@ function updateTransaction(updatedTrans, trans_id) {
 function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
-        url: '/transactions/${trans_id}',
-        data: '${trans_id}',
-        success: console.log('Transaction ${trans_id} successfully deleted'),
+        url: `/transactions/${trans_id}`,
+        data: `${trans_id}`,
+        success: console.log(`Transaction ${trans_id} successfully deleted`),
         error: err => {
             console.log('err')
         }
@@ -131,7 +128,6 @@ function getGoals() {
 }
 
 function displayGoals() {
-    console.log('displayGoals ran');
     const newHtml = goals.map(goal => {
         return `
             <div class="goals" data-goal_id="${goal.id}">
@@ -159,14 +155,12 @@ function getAndDisplayGoals() {
 
 function addGoal() {
     let goal = $('#goal-input').val();
-
     $.ajax({
         method: 'POST',
         url: '/goals',
         contentType: 'application/JSON',
         data: JSON.stringify({goal: goal}),
         success: newGoal => {
-            console.log(newGoal);
             goals.push(newGoal);
             displayGoals();
         },
@@ -181,7 +175,7 @@ function updateGoal(new_goal, goal_id) {
     console.log('Updating goal');
     $.ajax({
         method: 'PUT',
-        url: '/goals/${goal_id}',
+        url: `/goals/${goal_id}`,
         success: function() {
             displayGoals();
         },
@@ -193,10 +187,10 @@ function updateGoal(new_goal, goal_id) {
 }
 
 function deleteGoal(goal_id){
-    console.log('deleting goal ${goal_id}');
+    console.log(`deleting goal ${goal_id}`);
     $.ajax({
         method: 'DELETE',
-        url: '/goals/${goal_id}',
+        url: `/goals/${goal_id}`,
         success: function() {
             displayGoals();
         },
@@ -237,17 +231,23 @@ function handleNewTransaction() {
 }
 
 function handleTransactionUpdate() {
-    $('table').on('input', '.change-text', e => {
+    $('table').on('focusout', '.change-text', e => {
         let trans_id = $(e.target).closest('.transaction').data('trans_id');
-        let description = $(e.target).closest('.description').val();
-        let amount = $(e.target).closest('.amount-input').val();
-        let date = $(e.target).closest('.date').val();
+        //let description = $(e.target).closest('.description').val();
+        //let amount = $(e.target).closest('.amount-input').val();
+        //let date = $(e.target).closest('.date').val();
+        
+        let new_trans = $('#trans_' + goal_id).val();
+        let edited_goal = transactions.find(transaction => transaction.id == trans_id);
+        edited_trans.transaction = new_trans;
+
         let updatedTrans = {
             id: trans_id,
             description: description,
             amount: amount,
             date: date
         }
+        
         updateTransaction(updatedTrans, trans_id);
     });
 }
@@ -256,7 +256,6 @@ function handleTransactionDelete() {
     $('table').on('click', '.remove-trans-btn', e => {
         e.preventDefault();
         let trans_id = $(e.target).closest('.transaction').data('trans_id');
-        console.log('You clicked delete transaction');
         $(e.target).closest('tr').remove();
         deleteTransaction(trans_id);
     });
@@ -275,18 +274,16 @@ function handleUpdateGoal() {
         //1. save the goal locally
         let goal_id = $(e.target).closest('.goals').data('goal_id');
         let new_goal = $('#goal_' + goal_id).val();
-        console.log(goal_id, new_goal);
         let edited_goal = goals.find(goal => goal.id == goal_id);
-        console.log(edited_goal);
         edited_goal.goal = new_goal;
         addGoal(new_goal, goal_id);
         $('.editable').removeClass('editable');
+        $('#new-goal-section input[type="text"]').val('');
     });
 }
  
 function handleDeleteGoal() {
     $('.goals').on('click', '.complete-goal', e => {
-        console.log('You completed a goal!');
         e.preventDefault();
         let goal_id = $(e.target).closest('.goals').data('goal_id');
         deleteGoal(goal_id);
@@ -301,12 +298,15 @@ $(function() {
     $('#new-goal-section').hide();
     $('.transaction-section').hide();
     $('#new-trans-section').hide();
+    $('#select-cat-message').hide();
+    $('#main-header').removeClass('.small');
 
     $('#show-demo-btn').on('click', e => {
         $('.total-budget-section').show();
         $('.goal-section').show();
         $('.transaction-section').show();
         $('#show-demo-btn').hide();
+        $('#about-section').hide();
         displayMonth()
         Promise.all([
             getAndDisplayTransactions()
@@ -314,7 +314,7 @@ $(function() {
             calculateBudget();
         });
         getAndDisplayGoals();
-    });
+     });
 
     $('#new-trans-btn').on('click', e => {
         e.preventDefault();

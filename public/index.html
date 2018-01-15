@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Budget Tracker Demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
     <header>
-        <h1>Budget Tracker Demo</h1>
+        <h1 id="main-header">Budget Tracker</h1>
     </header>
     
     <section id="about-section">
@@ -34,22 +35,6 @@
     <section class="total-budget-section">
         <h1 class="month"> Budget</h1>
         <div class="budget-data"></div>
-    </section>
-
-    <section class="goal-section">
-        <h2 class="goal-header">Goals</h2>
-        <div class="goals"></div>
-        <button id="new-goal-btn">+ Add a new goal</button>
-    </section>
-
-    <section id="new-goal-section">
-        <form action="#" id-"new-goal-form">
-            <label for="goal-input"></label>
-            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
-
-            <button type="submit" id="submit-goal-btn">Submit</button>
-            <button type="reset" id="cancel-goal-btn">Cancel</button>
-        </form>
     </section>
 
     <section class="transaction-section">
@@ -93,6 +78,22 @@
             <button type="submit" id="submit-new-trans">Submit</button>
             <button type="reset" id="cancel-trans-btn">Cancel</button>
     
+        </form>
+    </section>
+
+    <section class="goal-section">
+        <h2 class="goal-header">Goals</h2>
+        <div class="goals"></div>
+        <button id="new-goal-btn">+ Add a new goal</button>
+    </section>
+
+    <section id="new-goal-section">
+        <form action="#" id-"new-goal-form">
+            <label for="goal-input"></label>
+            <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
+
+            <button type="submit" id="submit-goal-btn">Submit</button>
+            <button type="reset" id="cancel-goal-btn">Cancel</button>
         </form>
     </section>
 
