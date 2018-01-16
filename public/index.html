@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://use.fontawesome.com/dcd061dc49.js"></script>
     <title>Budget Tracker Demo</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
@@ -20,12 +21,15 @@
 
         <div id="about">
             <div class="about col-4">
+                <i class="fa fa-money fa-5x" aria-hidden="true"></i>
                 <p>Log your purchases</p>
             </div>
             <div class="about col-4">
+                <i class="fa fa-list fa-5x" aria-hidden="true"></i>
                 <p>Set spending and savings goals</p>
             </div>
             <div class="about col-4">
+                <i class="fa fa-eye fa-5x" aria-hidden="true"></i>
                 <p>View the full picture of your money</p>
             </div>
         </div>    
@@ -39,9 +43,8 @@
         <div class="budget-data"></div>
     </section>
 
-    <section class="transaction-section col-6">
+    <section class="transaction-section">
         <h2 class="transaction-header">Transactions</h2>
-        <button id="new-trans-btn" type="submit">+ Add Transaction</button>
         <table class="expense-data">
             <thead>
                 <tr>
@@ -54,9 +57,10 @@
             </thead>
             <tbody></tbody>
         </table>
+        <button id="new-trans-btn" type="submit">+ Add Transaction</button>
     </section>
    
-    <section class="col-3" id="new-trans-section">
+    <section id="new-trans-section">
         <h1>New Transaction</h1>
         <form action="#" class="trans-form">
             <label for="select-type">Select Type</label>
@@ -83,13 +87,13 @@
         </form>
     </section>
 
-    <section class="goal-section col-6">
+    <section class="goal-section">
         <h2 class="goal-header">Goals</h2>
         <div class="goals"></div>
         <button id="new-goal-btn">+ Add a new goal</button>
     </section>
 
-    <section class="col-6" id="new-goal-section">
+    <section id="new-goal-section">
         <form action="#" id-"new-goal-form">
             <label for="goal-input"></label>
             <input type="text" name="goal-input" id="goal-input" placeholder="my goal">
