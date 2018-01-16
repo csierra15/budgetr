@@ -233,7 +233,7 @@ function updateGoal(id, goal) {
         dataType: 'JSON',
         data: JSON.stringify({id: id, goal: goal}),
         success: function() {
-            displayGoals();
+            getAndDisplayGoals();
         },
         error: err => {
             console.log(err);
@@ -281,7 +281,7 @@ function handleDeleteGoal() {
         e.preventDefault();
         let id = $(e.target).closest('.goals').data('goal_id');
         deleteGoal(id);
-        $(e.target).closest('.goals').detach();
+        $(e.target).closest('.goals').remove();
     });
 }
 
