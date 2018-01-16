@@ -216,7 +216,7 @@ function addGoal() {
         data: JSON.stringify({goal: goal}),
         success: newGoal => {
             goals.push(newGoal);
-            displayGoals();
+            getAndDisplayGoals();
         },
         error: (err) => {
             console.log(err);

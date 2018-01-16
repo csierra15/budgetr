@@ -78,8 +78,6 @@ tbody {
     border-bottom: 1px solid;
 }
 
-/*NEW TRANSACTION*/
-
 label {
     display: block;
 }
@@ -108,4 +106,12 @@ label {
 
 .expense-data {
     margin: 0 auto;
+}
+
+#select-cat-message {
+    color: red;
+}
+
+@media only screen and (min-width: 640px) {
+    
 }
