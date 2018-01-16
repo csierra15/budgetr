@@ -26,13 +26,13 @@ body {
 button {
     background-color: #093916;
     color: 	#FFE0C2;
-	height: 3rem;
+	height: 2rem;
 	width: 8rem;
-	margin-bottom: 1rem;
     font-family: 'Montserrat';
     font-size: 0.8em;
 	text-align: center;
-	border-radius: 5px;
+    border-radius: 5px;
+    margin: 0 0 0 1rem;
 }
 
 input {
@@ -47,7 +47,7 @@ input {
     text-align: center;
 }
 
-#main-header {
+header {
     position: fixed;
     margin: 0;
     top: 0;
@@ -58,17 +58,20 @@ input {
     height: 3.5rem;
 }
 
-h1 {
+#main-header {
     text-align: left;
     padding-left: 1rem;
-    padding-top: 1rem;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 h2 {
     padding-bottom: 1em;
     padding-top: 1em;
     font-size: 3em;
+}
+
+.budget-data {
+    font-size: 1.9em;
 }
 
 .fa {
@@ -86,7 +89,8 @@ h2 {
 #show-demo-btn {
     margin: 5em 5em 5em 3em;
     width: 15rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    height: 3rem;
 }
 
 .month {
@@ -99,8 +103,8 @@ h2 {
     height: 2rem;
 }
 
-tbody {
-    border-bottom: 1px solid;
+th {
+    padding: 1em;
 }
 
 label {

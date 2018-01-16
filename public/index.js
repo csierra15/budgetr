@@ -50,7 +50,7 @@ function displayTransactions() {
                 `<td class="change-text amount" contenteditable="true">$${amount}</td>` +
                 `<td class="change-text date" contenteditable="true">${date}</td>` +
                 `<td class="change-text category">${transaction.category}</td>` +
-                `<td class="remove-tr"><button class="remove-trans-btn">x</button></td>` +
+                `<td class="remove-tr"><button class="remove-trans-btn">x</button><button class="save-trans-btn" style="display: none">Save</button></td>` +
             `</tr>`
     });
     $(".expense-data tbody").html(newHtml);
@@ -104,6 +104,7 @@ function updateTransaction(id, updatedTrans) {
         data: JSON.stringify({updatedTrans}),
         success: function(res) {
             getAndDisplayTransactions();
+            console.log(transactions);
         },
         error: err => {
             console.log(err);
@@ -140,7 +141,8 @@ function handleNewTransaction() {
 }
 
 function handleTransactionUpdate() {
-    $('table').on('focusout', '.change-text', e => {
+    $('table').on('click', '.save-trans-btn', e => {
+        e.preventDefault();
         let id = $('.transaction').data('trans_id');
         let description = $(e.target).closest('tr').find('.description').text();
         let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
@@ -302,6 +304,7 @@ $(function() {
         $('.transaction-section').show();
         $('#show-demo-btn').hide();
         $('#about-section').hide();
+        $('.save-trans-btn').hide();
         displayMonth()
         Promise.all([
             getAndDisplayTransactions()
@@ -316,6 +319,11 @@ $(function() {
         $('#new-trans-section').show();
         $('#new-trans-btn').hide();
     });
+
+    $('table').on('focus', '.change-text', e => {
+        e.preventDefault();
+        $('.save-trans-btn').show();
+    })
 
     $('#cancel-trans-btn').on('click', e => {
         $('#new-trans-section').hide();
