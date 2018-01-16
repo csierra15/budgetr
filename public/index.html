@@ -51,7 +51,7 @@
                     <th>Description</th>
                     <th>Amount</th>
                     <th>Date</th>
-                    <th>Category</th>
+                    <th>Type</th>
                     <th></th>
                 </tr>
             </thead>
@@ -61,13 +61,12 @@
     </section>
    
     <section id="new-trans-section">
-        <h1>New Transaction</h1>
         <form action="#" class="trans-form">
             <label for="select-type">Select Type</label>
             <select name="select-type" id="select-category">
-                <option value="0">+/-</option>
-                <option value="+">+</option>
-                <option value="-">-</option>
+                <option value="0">income/expense</option>
+                <option value="+">income</option>
+                <option value="-">expense</option>
             </select>
 
             <p id="select-cat-message">Please select a category</p>

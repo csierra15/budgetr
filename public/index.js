@@ -134,6 +134,7 @@ function handleNewTransaction() {
             $('#new-trans-section').hide();
             $('#new-trans-section input[type="text"]').val('');
             $('#select-category').val('0');
+            $('#new-trans-btn').show();
         }
     });
 }
@@ -313,10 +314,12 @@ $(function() {
     $('#new-trans-btn').on('click', e => {
         e.preventDefault();
         $('#new-trans-section').show();
+        $('#new-trans-btn').hide();
     });
 
     $('#cancel-trans-btn').on('click', e => {
         $('#new-trans-section').hide();
+        $('#new-trans-btn').show();
     });
 
     $('#new-goal-btn').on('click', e => {
