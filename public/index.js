@@ -87,25 +87,6 @@ function addTransaction() {
     });
 }
 
-/*
-function updateTransaction(id, updatedTrans) {
-    $.ajax({
-        method: 'PUT',
-        url: `/transactions/${id}`,
-        contentType: 'application/JSON',
-        dataType: 'JSON',
-        data: JSON.stringify({updatedTrans}),
-        success: function(res) {
-            transactions.push(res);
-            calculateBudget();
-        },
-        error: err => {
-            console.log(err);
-        }
-    });
-}
-*/
-
 function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
@@ -132,33 +113,6 @@ function handleNewTransaction() {
         }
     });
 }
-
-/*
-function handleTransactionUpdate() {
-    $('table').on('click', '.save-trans-btn', e => {
-        e.preventDefault();
-
-        let id = $('.transaction').data('trans_id');
-        let description = $(e.target).closest('tr').find('.description').text();
-        let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
-        let date = $(e.target).closest('tr').find('.date').text();
-
-        let transaction = $('#trans_' + id).val();
-        let edited_trans = transactions.find(transaction => transaction.id == id);
-        edited_trans.description = description;
-        edited_trans.amount = amount;
-        edited_trans.date = date;
-        
-        let updatedTrans = {
-            id: id,
-            description: description,
-            amount: amount,
-            date: date
-        }
-        updateTransaction(id, updatedTrans);
-        });
-}
-*/
 
 function handleTransactionDelete() {
     $('table').on('click', '.remove-trans-btn', e => {
@@ -303,7 +257,7 @@ $(function() {
         $('.transaction-section').show();
         $('#show-demo-btn').hide();
         $('#about-section').hide();
-        //$('.save-trans-btn').hide();
+
         Promise.all([
             getAndDisplayTransactions()
         ]).then(() => {
@@ -317,13 +271,6 @@ $(function() {
         $('#new-trans-section').show();
         $('#new-trans-btn').hide();
     });
-
-    /*
-    $('table').on('focus', '.change-text', e => {
-        e.preventDefault();
-        $('.save-trans-btn').show();
-    })
-    */
 
     $('#cancel-trans-btn').on('click', e => {
         $('#new-trans-section').hide();
@@ -347,7 +294,6 @@ $(function() {
 
     $(function() {
         handleNewTransaction();
-        //handleTransactionUpdate();
         handleTransactionDelete();
         handleNewGoal();
         handleUpdateGoal();
