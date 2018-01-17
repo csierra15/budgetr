@@ -1,10 +1,6 @@
 'use strict';
 let user = localStorage.getItem('currentUser');
 
-function displayMonth() {
-    $(".month").prepend(moment().format('MMMM YYYY'));
-}
-
 function calculateBudget() {
     const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
         return parseFloat(a) + parseFloat(b);
@@ -16,8 +12,6 @@ function calculateBudget() {
     let totalBudget = total.toFixed(2);
 
     $(".budget-data").html("$" + totalBudget);
-
-    console.log('calculating budget');
 }
 
 //===== TRANSACTIONS ======
@@ -28,8 +22,6 @@ function processTransactionData(transactionData) {
     transactions = Object.values(transactionData.transactions);
     return expenses;
 }
-
-// GET /expenses/:date - return list of transactions for selected month
 
 function getTransactions() {
     return fetch('/transactions')
@@ -46,11 +38,11 @@ function displayTransactions() {
         let date = moment(transaction.date).format('L')
         return `
             <tr class="transaction" data-trans_id="${transaction.id}">` +
-                `<td class="change-text description" contenteditable="true">${transaction.description}</td>` + 
-                `<td class="change-text amount" contenteditable="true">$${amount}</td>` +
-                `<td class="change-text date" contenteditable="true">${date}</td>` +
+                `<td class="change-text description" contenteditable="false">${transaction.description}</td>` + 
+                `<td class="change-text amount" contenteditable="false">$${amount}</td>` +
+                `<td class="change-text date" contenteditable="false">${date}</td>` +
                 `<td class="change-text category">${transaction.category}</td>` +
-                `<td class="remove-tr"><button class="remove-trans-btn">x</button><button class="save-trans-btn" style="display: none">Save</button></td>` +
+                `<td class="remove-tr"><button class="remove-trans-btn">x</button></td>` +
             `</tr>`
     });
     $(".expense-data tbody").html(newHtml);
@@ -95,6 +87,7 @@ function addTransaction() {
     });
 }
 
+/*
 function updateTransaction(id, updatedTrans) {
     $.ajax({
         method: 'PUT',
@@ -103,19 +96,20 @@ function updateTransaction(id, updatedTrans) {
         dataType: 'JSON',
         data: JSON.stringify({updatedTrans}),
         success: function(res) {
-            console.log(transactions);
+            transactions.push(res);
+            calculateBudget();
         },
         error: err => {
             console.log(err);
         }
     });
 }
+*/
 
 function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
-        success: console.log(`Transaction ${trans_id} successfully deleted`),
         error: err => {
             console.log('err')
         }
@@ -139,23 +133,32 @@ function handleNewTransaction() {
     });
 }
 
+/*
 function handleTransactionUpdate() {
     $('table').on('click', '.save-trans-btn', e => {
         e.preventDefault();
+
         let id = $('.transaction').data('trans_id');
         let description = $(e.target).closest('tr').find('.description').text();
         let amount = $(e.target).closest('tr').find('.amount').text().replace("$", "");
         let date = $(e.target).closest('tr').find('.date').text();
-    let updatedTrans = {
-        id: id,
-        description: description,
-        amount: amount,
-        date: date
-    }
-    updateTransaction(id, updatedTrans);
-    return calculateBudget();
-    });
+
+        let transaction = $('#trans_' + id).val();
+        let edited_trans = transactions.find(transaction => transaction.id == id);
+        edited_trans.description = description;
+        edited_trans.amount = amount;
+        edited_trans.date = date;
+        
+        let updatedTrans = {
+            id: id,
+            description: description,
+            amount: amount,
+            date: date
+        }
+        updateTransaction(id, updatedTrans);
+        });
 }
+*/
 
 function handleTransactionDelete() {
     $('table').on('click', '.remove-trans-btn', e => {
@@ -241,7 +244,7 @@ function updateGoal(id, goal) {
             console.log(err);
             $('.goals').closest().append(`<p>Couldn't update goal :(</p>`);
         }
-    })
+    });
 }
 
 function deleteGoal(id){
@@ -249,9 +252,6 @@ function deleteGoal(id){
     $.ajax({
         method: 'DELETE',
         url: `/goals/${id}`,
-        success: function() {
-            console.log('Way to go! You completed a goal!');
-        },
         error: err => {
             console.log(err);
         }
@@ -303,8 +303,7 @@ $(function() {
         $('.transaction-section').show();
         $('#show-demo-btn').hide();
         $('#about-section').hide();
-        $('.save-trans-btn').hide();
-        displayMonth()
+        //$('.save-trans-btn').hide();
         Promise.all([
             getAndDisplayTransactions()
         ]).then(() => {
@@ -319,10 +318,12 @@ $(function() {
         $('#new-trans-btn').hide();
     });
 
+    /*
     $('table').on('focus', '.change-text', e => {
         e.preventDefault();
         $('.save-trans-btn').show();
     })
+    */
 
     $('#cancel-trans-btn').on('click', e => {
         $('#new-trans-section').hide();
@@ -346,24 +347,10 @@ $(function() {
 
     $(function() {
         handleNewTransaction();
-        handleTransactionUpdate();
+        //handleTransactionUpdate();
         handleTransactionDelete();
         handleNewGoal();
         handleUpdateGoal();
         handleDeleteGoal();
     });
 });
-
-/*
-
-==charts to be added later==
-
-const DOUGHNUT_CHART = $("#displayData");
-const LINE_CHART = ("#spendingOverTime");
-
-let lineChart = new Chart(LINE_CHART, {
-    type: 'line',
-    data: data,
-    options: options
-});
-*/
