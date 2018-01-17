@@ -103,7 +103,6 @@ function updateTransaction(id, updatedTrans) {
         dataType: 'JSON',
         data: JSON.stringify({updatedTrans}),
         success: function(res) {
-            getAndDisplayTransactions();
             console.log(transactions);
         },
         error: err => {

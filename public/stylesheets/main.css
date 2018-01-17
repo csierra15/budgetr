@@ -103,6 +103,11 @@ h2 {
     height: 2rem;
 }
 
+#new-trans-btn, #new-goal-btn {
+    margin-top: 1em;
+    background-color: #4C130C;
+}
+
 th {
     padding: 1em;
 }
