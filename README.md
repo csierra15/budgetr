@@ -9,3 +9,12 @@ Budget Tracker was built using Node and Express on the backend and HTML, CSS, JS
 ![Add Transaction](/budgetAddTrans.png?raw=true "Add Trans")
 ![Add Goal](/budgetAddGoal.png?raw=true "Add Goal")
 ![Update Goal](/budgetUpdateGoal.png?raw=true "Update Goal")
+
+Future Iterations of This App
+-----------------------------
+
+Include the ability to create an account and user authentication
+
+A chart to see spending over time
+
+View purchases for a single month
