@@ -243,6 +243,9 @@ function handleDeleteGoal() {
 
 $(function() {
 
+    $('#logout-btn').hide();
+    $('#login').hide();
+    $('#register').hide();
     $('.total-budget-section').hide();
     $('.goal-section').hide();
     $('#new-goal-section').hide();
@@ -251,6 +254,46 @@ $(function() {
     $('#select-cat-message').hide();
     $('#main-header').removeClass('.small');
 
+    $('#login-btn').on('click', e => {
+        e.preventDefault();
+        $('#about-section').hide();
+        $('#footer').hide();
+        $('#register').hide();
+        $('#login').show();
+    });
+
+    $('#register-btn').on('click', e => {
+        e.preventDefault();
+        $('#about-section').hide();
+        $('#footer').hide();
+        $('#login').hide();
+        $('#register').show();
+    });
+
+    $('#log-in-link').on('click', e => {
+        e.preventDefault();
+        $('#footer').hide();
+        $('#register').hide();
+        $('#login').show();
+    });
+
+    $('#register-link').on('click', e => {
+        e.preventDefault();
+        $('#footer').hide();
+        $('#login').hide();
+        $('#register').show();
+    });
+
+/*make sure this only happens when not logged in*/
+    $('#main-header').on('click', e => {
+        $('#about-section').show();
+        $('#footer').show();
+        $('#register').hide();
+        $('#login').hide();
+    })
+
+
+/*change show-demo to login once auth is functional*/
     $('#show-demo-btn').on('click', e => {
         $('.total-budget-section').show();
         $('.goal-section').show();
