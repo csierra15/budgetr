@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    border: 0;
     font-size: 100%;
     box-sizing: border-box;
     /*  CHROME  */
@@ -17,10 +16,9 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    text-align: center;
     background-color: #F5F5F5;
-    padding-top: 10rem;
-    padding-bottom: 10rem;
+    padding-top: 5rem;
+    text-align: center;
 }
 
 button {
@@ -32,7 +30,12 @@ button {
     font-size: 0.8em;
 	text-align: center;
     border-radius: 5px;
-    margin: 0 0 0 1rem;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2C673C;
 }
 
 input {
@@ -41,37 +44,58 @@ input {
 	padding-left: 1rem;
 	display: block;
 	width: 100%;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
     font-family: 'Montserrat';
     text-align: center;
+    margin: 1rem auto;
 }
 
-header {
-    position: fixed;
+#main-header {
+    position: absolute;
     margin: 0;
     top: 0;
     left: 0;
     font-size: 1.8em;
-    background-color: #ABABAB;
-    width: 100%;
-    height: 3.5rem;
-}
-
-#main-header {
     text-align: left;
-    padding-left: 1rem;
-    font-size: 1em;
-}
-
-h2 {
-    padding-bottom: 1em;
-    padding-top: 1em;
+    padding: 1rem 0 0 1rem;
     font-size: 3em;
+    cursor: pointer;
 }
 
-.budget-data {
-    font-size: 1.9em;
+.img-centered {
+    position: relative;
+}
+
+img {
+    width: 100%;
+    height: 30rem;
+    background-size: cover;
+}
+
+.img-words, #login-btn, #register-btn, #show-demo-btn {
+    position: absolute;
+}
+
+.img-words {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFF;
+    font-size: 3rem;
+}
+
+#show-demo-btn {
+    bottom: 10%;
+    left: 50%;
+}
+
+#login-btn {
+    bottom: 25%;
+    left: 50%;
+}
+
+#register-btn {
+    bottom: 25%;
+    right: 50%;
 }
 
 .fa {
@@ -84,32 +108,47 @@ h2 {
 
 .about {
     float: left;
+    padding-bottom: 5rem;
 }
 
-#show-demo-btn {
-    margin: 5em 5em 5em 3em;
-    width: 15rem;
+#login-btn, #register-btn {
+    width: 8rem;
     font-size: 1rem;
     height: 3rem;
+    margin: 0 2em 0 2em;
+}
+
+.budget-data {
+    font-size: 1.9em;
 }
 
 .month {
     text-align: center;
 }
 
-.remove-trans-btn {
+#new-trans-btn, #new-goal-btn, .remove-trans-btn {
     background-color: #4C130C;
+}
+
+#new-trans-btn:hover, #new-goal-btn:hover, .remove-trans-btn:hover {
+    background-color: #6E2920;
+}
+
+.remove-trans-btn {
     width: 2rem;
     height: 2rem;
 }
 
 #new-trans-btn, #new-goal-btn {
     margin-top: 1em;
-    background-color: #4C130C;
 }
 
 th {
     padding: 1em;
+}
+
+table {
+    border-bottom: 1px solid;
 }
 
 label {
@@ -151,6 +190,19 @@ label {
     color: red;
 }
 
+#footer {
+   position: fixed;
+   left: 0em;
+   bottom: 0em;
+   height: 2rem;
+   width: 100%;
+}
+
 @media only screen and (min-width: 640px) {
+
+    input {
+        display: inline;
+        width: 30%;
+    }
     
 }

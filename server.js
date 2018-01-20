@@ -1,16 +1,20 @@
 'use strict';
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const { PORT, DATABASE_URL } = require('./config')
 const { router: transactionRouter } = require('./transactionRouter');
 const { router: goalRouter } = require('./goalRouter');
-
-const app = express();
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
+
+const app = express();
 
 app.use(express.static('public'));
 app.use(morgan('common'));
@@ -28,6 +32,12 @@ app.use(function (req, res, next) {
 
 app.use('/transactions', transactionRouter);
 app.use('/goals', goalRouter);
+
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
   
 app.use('*', (req, res) => {
     return res.status(404).json({ message: 'Not Found' });
