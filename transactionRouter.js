@@ -56,32 +56,6 @@ Transactions
     });
 });
 
-router.put('/:id', (req, res) => {
-    if (!(req.params.id && req.body.updatedTrans.id && req.params.id === req.body.updatedTrans.id)) {
-        console.log(req.body.updatedTrans.id);
-        res.status(400).json({
-          error: `Request path id and request body id ${req.body.updatedTrans.id} values must match`
-        });
-      }
-    
-      /*const updated = {};
-      const updateableFields = ['description', 'amount', 'date', 'category'];
-      updateableFields.forEach(field => {
-          console.log(field);
-          console.log(req.body);
-        if (field in req.body != 0) {
-            console.log(req.body);
-          updated[field] = req.body.updatedTrans[field];
-        }
-      });*/
-
-      Transactions
-        .findByIdAndUpdate(req.params.id, { $set: req.body.updatedTrans }, { new: true })
-        .then(updatedTransaction => res.json(updatedTransaction))
-        .catch(err => res.status(500).json({ message: 'Could not update' }));
-    
-});
-
 router.delete('/:id', (req, res) => {
     Transactions
         .findByIdAndRemove(req.params.id)
