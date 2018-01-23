@@ -27,6 +27,7 @@ button {
 	height: 2rem;
 	width: 8rem;
     font-family: 'Montserrat';
+    display: block;
     font-size: 0.8em;
 	text-align: center;
     border-radius: 5px;
@@ -57,7 +58,6 @@ input {
     font-size: 1.8em;
     text-align: left;
     padding: 1rem 0 0 1rem;
-    font-size: 3em;
     cursor: pointer;
 }
 
@@ -71,7 +71,7 @@ img {
     background-size: cover;
 }
 
-.img-words, #login-btn, #register-btn, #show-demo-btn {
+.img-words, #show-demo-btn {
     position: absolute;
 }
 
@@ -80,22 +80,18 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
     color: #FFFF;
-    font-size: 3rem;
+    font-size: 1.8rem;
+    padding-bottom: 5rem;
 }
 
 #show-demo-btn {
-    bottom: 10%;
-    left: 50%;
-}
-
-#login-btn {
     bottom: 25%;
-    left: 50%;
-}
-
-#register-btn {
-    bottom: 25%;
-    right: 50%;
+    left: 50%;  
+    transform: translate(-75%, -50%);
+    width: 8rem;
+    font-size: 1rem;
+    height: 3rem;
+    margin: 0 2em 0 2em;
 }
 
 .fa {
@@ -108,14 +104,6 @@ img {
 
 .about {
     float: left;
-    padding-bottom: 5rem;
-}
-
-#login-btn, #register-btn {
-    width: 8rem;
-    font-size: 1rem;
-    height: 3rem;
-    margin: 0 2em 0 2em;
 }
 
 .budget-data {
@@ -191,14 +179,19 @@ label {
 }
 
 #footer {
-   position: fixed;
-   left: 0em;
-   bottom: 0em;
-   height: 2rem;
-   width: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2rem;
+    width: 100%;
 }
 
 @media only screen and (min-width: 640px) {
+
+    #main-header,.img-words {
+        font-size: 3rem;
+    }
 
     input {
         display: inline;
