@@ -1,18 +1,4 @@
 'use strict';
-let user = localStorage.getItem('currentUser');
-
-function calculateBudget() {
-    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
-        return parseFloat(a) + parseFloat(b);
-    });
-    let total = totalIncome - totalExpenses;
-    let totalBudget = total.toFixed(2);
-
-    $(".budget-data").html("$" + totalBudget);
-}
 
 //===== TRANSACTIONS ======
 
@@ -91,6 +77,9 @@ function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
+        success: function() {
+            calculateBudget();
+        },
         error: err => {
             console.log('err')
         }
@@ -107,7 +96,7 @@ function handleNewTransaction() {
             addTransaction();
             $('#select-cat-message').hide();
             $('#new-trans-section').hide();
-            $('#new-trans-section input[type="text"]').val('');
+            $('#new-trans-section input').val('');
             $('#select-category').val('0');
             $('#new-trans-btn').show();
         }
@@ -121,6 +110,19 @@ function handleTransactionDelete() {
         $(e.target).closest('tr').remove();
         deleteTransaction(trans_id);
     });
+}
+
+function calculateBudget() {
+    const totalExpenses = transactions.filter(transaction => transaction.category != 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    }, 0);
+    const totalIncome = transactions.filter(transaction => transaction.category === 'income').map(transaction => transaction.amount).reduce((a, b) => {
+        return parseFloat(a) + parseFloat(b);
+    }, 0);
+    let total = totalIncome - totalExpenses;
+    let totalBudget = total.toFixed(2);
+
+    $(".budget-data").html("$" + totalBudget);
 }
 
 //===== GOALS ======
