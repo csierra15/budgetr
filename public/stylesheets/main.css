@@ -197,6 +197,11 @@ label {
     display: block;
 }
 
+.transaction-header, .goal-header {
+    border-bottom: 1px solid #153B44;
+    border-width: 75%;
+}
+
 .editable .goal-display {
     display: none;
 }

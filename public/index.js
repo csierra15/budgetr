@@ -221,6 +221,7 @@ function handleNewGoal() {
         addGoal();
         $('#new-goal-section').hide();
         $('#new-goal-section input[type="text"]').val('');
+        $('#new-goal-btn').show('fast');
     })
 }
 
