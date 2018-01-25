@@ -14,6 +14,10 @@
     -webkit-padding-end: 0px;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #F5F5F5;
@@ -23,15 +27,14 @@ body {
 
 button {
     background-color: #093916;
-    color: 	#FFE0C2;
+    color: 	#FFEBCD;
 	height: 2rem;
 	width: 8rem;
     font-family: 'Montserrat';
-    display: block;
-    font-size: 0.8em;
+    font-size: 0.8rem;
 	text-align: center;
     border-radius: 5px;
-    margin: 0 auto;
+    margin: 1rem auto;
     cursor: pointer;
 }
 
@@ -46,8 +49,16 @@ input {
 	display: block;
 	width: 100%;
     font-family: 'Montserrat';
-    text-align: center;
+    text-align: left;
     margin: 1rem auto;
+}
+
+label {
+    text-align: left;
+}
+
+section {
+    padding-top: 2rem;
 }
 
 #main-header {
@@ -55,7 +66,7 @@ input {
     margin: 0;
     top: 0;
     left: 0;
-    font-size: 1.8em;
+    font-size: 1.5rem;
     text-align: left;
     padding: 1rem 0 0 1rem;
     cursor: pointer;
@@ -91,15 +102,16 @@ img {
     width: 8rem;
     font-size: 1rem;
     height: 3rem;
-    margin: 0 2em 0 2em;
+    margin: 0 2rem 0 2rem;
 }
 
 .fa {
-    padding: 0.5em;
+    padding: 0.5rem;
 }
 
 #about {
     margin: 0 auto;
+    padding-bottom: 5rem;
 }
 
 .about {
@@ -107,19 +119,27 @@ img {
 }
 
 .budget-data {
-    font-size: 1.9em;
+    font-size: 1.9rem;
 }
 
 .month {
     text-align: center;
 }
 
-#new-trans-btn, #new-goal-btn, .remove-trans-btn {
+.remove-trans-btn {
     background-color: #4C130C;
 }
 
-#new-trans-btn:hover, #new-goal-btn:hover, .remove-trans-btn:hover {
+#new-trans-btn, #new-goal-btn {
+    background-color: #B8860B
+}
+
+.remove-trans-btn:hover {
     background-color: #6E2920;
+}
+
+#new-trans-btn:hover, #new-goal-btn:hover {
+    background-color: #E4AB1F; 
 }
 
 .remove-trans-btn {
@@ -128,14 +148,14 @@ img {
 }
 
 #new-trans-btn, #new-goal-btn {
-    margin-top: 1em;
+    margin-top: 1rem;
 }
 
 th {
-    padding: 1em;
+    padding: 0.5rem;
 }
 
-table {
+table, th, tr {
     border-bottom: 1px solid;
 }
 
@@ -144,12 +164,14 @@ label {
 }
 
 #select-category {
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
-    margin: 1em;
+    margin: 1rem;
+    width: 75%;
 }
 
 .trans-form {
-    padding: 10px;
+    padding: 0.5rem;
 }
 
 .editable input {
@@ -178,24 +200,20 @@ label {
     color: red;
 }
 
-#footer {
-    position: fixed;
+footer {
+    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
     height: 2rem;
     width: 100%;
+    font-size: 0.8rem;
 }
 
 @media only screen and (min-width: 640px) {
 
     #main-header,.img-words {
         font-size: 3rem;
-    }
-
-    input {
-        display: inline;
-        width: 30%;
     }
     
 }

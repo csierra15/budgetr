@@ -78,6 +78,7 @@ function deleteTransaction(trans_id) {
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
         success: function() {
+            getTransactions();
             calculateBudget();
         },
         error: err => {
@@ -251,11 +252,6 @@ $(function() {
     $('.transaction-section').hide();
     $('#new-trans-section').hide();
     $('#select-cat-message').hide();
-    $('#footer').hide();
-
-    $(window).scroll(() => {
-        $('#footer').show();
-    })
 
     $('#show-demo-btn').on('click', e => {
         $('.total-budget-section').show();
