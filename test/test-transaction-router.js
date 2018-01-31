@@ -96,36 +96,7 @@ describe('Transaction API resource', function() {
                 });
           });
       });
-
-      /*describe('PUT endpoint', function() {
-          it('should update fields sent over', function() {
-              const updateData = {
-                  'description': 'paycheck',
-                  'amount': '200',
-                  'category': 'income'
-              };
-
-              return Transactions
-                .findOne()
-                .then(function(transaction) {
-                    updateData.id = transaction.id;
-
-                    return chai.request(app)
-                        .put(`/transactions/${transaction.id}`)
-                        .send(updateData);
-                })
-                .then(function(res) {
-                    res.should.have.status(204);
-
-                    return Transactions.findById(updateData.id);
-                })
-                .then(function(transaction) {
-                    transaction.description.should.equal(updateData.description);
-                    transaction.amount.should.equal(updateData.amount);
-                    transaction.category.should.equal(updateData.category);
-                });
-          });
-      });*/
+  
 
       describe('DELETE endpoint', function() {
         it('should delete a transaction by id', function() {
@@ -139,7 +110,7 @@ describe('Transaction API resource', function() {
               return chai.request(app).delete(`/transactions/${transaction.id}`);
             })
             .then(function(res) {
-              res.should.have.status(204);
+              res.should.have.status(200);
               return Transactions.findById(transaction.id);
             })
             .then(function(_transaction) {
