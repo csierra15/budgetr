@@ -77,14 +77,13 @@ function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
-        success: function() {
-            getTransactions();
-            calculateBudget();
-        },
         error: err => {
             console.log('err')
         }
-    })
+    }).done(function() {
+            calculateBudget();
+            console.log('transaction deleted!')
+        },)
 }
 
 function handleNewTransaction() {
@@ -124,6 +123,7 @@ function calculateBudget() {
     let totalBudget = total.toFixed(2);
 
     $(".budget-data").html("$" + totalBudget);
+    console.log('calculating budget...')
 }
 
 //===== GOALS ======

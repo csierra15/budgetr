@@ -1,6 +1,6 @@
 # Budget Tracker
 
-Budget Tracker is a fullstack budgeting app that is simple to use and doesn't need to connect to a bank account. Track both income and expenses and set goals for spending and saving. The no fuss way to view money.
+Budget Tracker is a fullstack budget tracking app that is simple to use and doesn't need to connect to a bank account. Track both income and expenses and set goals for spending and saving. The no fuss way to view money.
 
 Languages Used
 --------------
