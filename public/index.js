@@ -45,6 +45,7 @@ function addTransaction() {
     let description = $('#description-input').val();
     let amount = $('#amount-input').val().replace("$", "");
     let date = $('#date-input').val();
+    console.log(date);
     let category;
     let categoryInput = $('#select-category').val();
     if(categoryInput === '+'){
@@ -77,13 +78,15 @@ function deleteTransaction(trans_id) {
     $.ajax({
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
+        success: function(res) {
+            console.log(res);
+            transactions = res;
+            calculateBudget();
+        },
         error: err => {
             console.log('err')
         }
-    }).done(function() {
-            calculateBudget();
-            console.log('transaction deleted!')
-        },)
+    })
 }
 
 function handleNewTransaction() {
@@ -121,6 +124,7 @@ function calculateBudget() {
     }, 0);
     let total = totalIncome - totalExpenses;
     let totalBudget = total.toFixed(2);
+    console.log(total, totalBudget);
 
     $(".budget-data").html("$" + totalBudget);
     console.log('calculating budget...')

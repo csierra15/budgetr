@@ -60,7 +60,16 @@ router.delete('/:id', (req, res) => {
     Transactions
         .findByIdAndRemove(req.params.id)
         .then(() => {
-            res.status(204).json({message: `Transaction \`${req.params.id}\` was deleted`});
+            Transactions
+                .find()
+                .then(transactions => {
+                    console.log(transactions);
+                    res.json(transactions.map(transaction => transaction.serialize()));
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({error: 'Could not GET'});
+        });
         })
         .catch(err => {
             console.error(err);
