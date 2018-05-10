@@ -24,7 +24,7 @@ function displayTransactions() {
         let date = moment(transaction.date).format('L')
         return `
             <tr class="transaction" data-trans_id="${transaction.id}">` +
-                `<td class="change-text description" contenteditable="false">${transaction.description}</td>` + 
+                `<td class="change-text description" contenteditable="false">${transaction.description}</td>` +
                 `<td class="change-text amount" contenteditable="false">$${amount}</td>` +
                 `<td class="change-text date" contenteditable="false">${date}</td>` +
                 `<td class="change-text category">${transaction.category}</td>` +
@@ -45,7 +45,6 @@ function addTransaction() {
     let description = $('#description-input').val();
     let amount = $('#amount-input').val().replace("$", "");
     let date = $('#date-input').val();
-    console.log(date);
     let category;
     let categoryInput = $('#select-category').val();
     if(categoryInput === '+'){
@@ -53,7 +52,7 @@ function addTransaction() {
     }else if (categoryInput === '-'){
         category = 'expense';
     }
-    const newTransaction = 
+    const newTransaction =
         {description: description,
         amount: amount,
         date: date,
@@ -79,7 +78,6 @@ function deleteTransaction(trans_id) {
         method: 'DELETE',
         url: `/transactions/${trans_id}`,
         success: function(res) {
-            console.log(res);
             transactions = res;
             calculateBudget();
         },
@@ -124,10 +122,8 @@ function calculateBudget() {
     }, 0);
     let total = totalIncome - totalExpenses;
     let totalBudget = total.toFixed(2);
-    console.log(total, totalBudget);
 
     $(".budget-data").html("$" + totalBudget);
-    console.log('calculating budget...')
 }
 
 //===== GOALS ======
@@ -160,7 +156,7 @@ function displayGoals() {
                     <input type="text" value="${goal.goal}" id="goal_${goal.id}"/>
                     <button type="submit" class="update-goal-btn">Save</button>
                 </div>
-            </div>`    
+            </div>`
     });
 
     $(".goals").html(newHtml);
@@ -209,7 +205,6 @@ function updateGoal(id, goal) {
 }
 
 function deleteGoal(id){
-    console.log(`deleting goal ${id}`);
     $.ajax({
         method: 'DELETE',
         url: `/goals/${id}`,
@@ -239,7 +234,7 @@ function handleUpdateGoal() {
         $('.editable').removeClass('editable');
     });
 }
- 
+
 function handleDeleteGoal() {
     $('.goals').on('click', '.complete-goal', e => {
         e.preventDefault();
